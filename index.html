@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>The Table - Church App</title>
     <style>
         * {
@@ -12,32 +12,41 @@
         }
 
         :root {
-            --primary-black: #000000;
+            --primary-black: #1a1a1a;
             --pure-white: #ffffff;
-            --accent-gold: #FFD700;
-            --accent-teal: #008080;
-            --accent-purple: #800080;
-            --accent-coral: #FF6B6B;
-            --accent-sage: #98D8C8;
-            --soft-gray: #f5f5f5;
-            --text-dark: #333333;
+            --accent-gold: #C5A028;
+            --accent-teal: #2A9D8F;
+            --accent-purple: #9B59B6;
+            --accent-coral: #E76F51;
+            --accent-sage: #6B9080;
+            --soft-gray: #F8F9FA;
+            --text-dark: #2C3E50;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --gradient-gold: linear-gradient(135deg, #C5A028, #E6B800);
+            --gradient-teal: linear-gradient(135deg, #2A9D8F, #4ECDC4);
+            --gradient-purple: linear-gradient(135deg, #9B59B6, #C39BD3);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--pure-white);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--soft-gray);
             color: var(--text-dark);
             min-height: 100vh;
         }
 
-        /* Splash Screen / Welcome Popup */
+        /* Import Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        /* Splash Screen */
         .splash-overlay {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0,0,0,0.9);
+            background: linear-gradient(135deg, var(--primary-black), #2C3E50);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -46,68 +55,75 @@
         }
 
         .splash-content {
-            background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral));
-            padding: 2rem;
-            border-radius: 20px;
+            background: var(--pure-white);
+            padding: 3rem 2rem;
+            border-radius: 24px;
             max-width: 400px;
             width: 90%;
             text-align: center;
-            color: var(--primary-black);
-            animation: slideUp 0.5s ease;
+            box-shadow: var(--shadow-lg);
+            animation: fadeInUp 0.6s ease;
         }
 
         .splash-logo {
-            width: 100px;
-            height: 100px;
-            background-color: var(--primary-black);
-            border-radius: 50%;
-            margin: 0 auto 1.5rem;
+            width: 120px;
+            height: 120px;
+            background: var(--primary-black);
+            border-radius: 30px;
+            margin: 0 auto 2rem;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: var(--pure-white);
             font-weight: bold;
-            border: 3px solid var(--pure-white);
+            box-shadow: var(--shadow-md);
         }
 
         .splash-content h2 {
             font-size: 2rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-black);
+        }
+
+        .splash-content p {
+            color: var(--text-dark);
+            margin-bottom: 2rem;
         }
 
         .splash-buttons {
             display: flex;
             gap: 1rem;
-            margin-top: 2rem;
         }
 
         .splash-btn {
             flex: 1;
             padding: 1rem;
             border: none;
+            border-radius: 12px;
             font-size: 1rem;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .splash-btn:hover {
-            transform: scale(1.05);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
         .splash-btn.signup {
-            background-color: var(--primary-black);
+            background: var(--gradient-gold);
             color: var(--pure-white);
         }
 
         .splash-btn.login {
-            background-color: var(--pure-white);
+            background: var(--pure-white);
             color: var(--primary-black);
             border: 2px solid var(--primary-black);
         }
 
-        /* Login/Signup Modals */
+        /* Auth Modals */
         .auth-modal {
             display: none;
             position: fixed;
@@ -115,7 +131,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0,0,0,0.8);
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
             z-index: 2100;
             justify-content: center;
             align-items: center;
@@ -126,38 +143,51 @@
         }
 
         .auth-content {
-            background: linear-gradient(135deg, var(--accent-sage), var(--accent-teal));
-            padding: 2rem;
-            border-radius: 20px;
+            background: var(--pure-white);
+            padding: 2.5rem;
+            border-radius: 24px;
             max-width: 400px;
             width: 90%;
-            color: var(--primary-black);
+            box-shadow: var(--shadow-lg);
         }
 
         .auth-content h2 {
             margin-bottom: 1.5rem;
-            text-align: center;
+            color: var(--primary-black);
+            font-size: 1.8rem;
         }
 
         .auth-input {
             width: 100%;
             padding: 1rem;
             margin-bottom: 1rem;
-            border: 2px solid var(--primary-black);
-            border-radius: 8px;
+            border: 2px solid #E0E0E0;
+            border-radius: 12px;
             font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .auth-input:focus {
+            border-color: var(--accent-gold);
+            outline: none;
         }
 
         .auth-btn {
             width: 100%;
             padding: 1rem;
-            background-color: var(--primary-black);
+            background: var(--gradient-gold);
             color: var(--pure-white);
             border: none;
+            border-radius: 12px;
             font-size: 1rem;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
             margin-bottom: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-2px);
         }
 
         .close-btn {
@@ -167,9 +197,16 @@
             font-size: 2rem;
             color: var(--pure-white);
             cursor: pointer;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* Main App Container */
+        /* Main App */
         .app-container {
             display: none;
             min-height: 100vh;
@@ -181,9 +218,9 @@
 
         /* Header */
         .app-header {
-            background: linear-gradient(135deg, var(--primary-black), var(--accent-purple));
-            color: var(--pure-white);
-            padding: 1rem;
+            background: var(--pure-white);
+            box-shadow: var(--shadow-sm);
+            padding: 1rem 2rem;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -206,75 +243,112 @@
         .app-logo-icon {
             width: 40px;
             height: 40px;
-            background-color: var(--pure-white);
-            border-radius: 8px;
+            background: var(--primary-black);
+            border-radius: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: var(--primary-black);
+            color: var(--pure-white);
             font-weight: bold;
             font-size: 1.2rem;
         }
 
         .app-logo-text {
             font-size: 1.5rem;
-            font-weight: bold;
+            font-weight: 700;
+            color: var(--primary-black);
         }
 
         .user-menu {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.5rem;
         }
 
         .user-avatar {
-            width: 40px;
-            height: 40px;
-            background-color: var(--accent-gold);
+            width: 45px;
+            height: 45px;
+            background: var(--gradient-gold);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: var(--primary-black);
-            font-weight: bold;
+            color: var(--pure-white);
+            font-weight: 600;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.05);
         }
 
         .logout-btn {
             background: none;
-            border: 2px solid var(--pure-white);
-            color: var(--pure-white);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+            border: 2px solid var(--primary-black);
+            color: var(--primary-black);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
             cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
         }
 
-        /* Main Content Area */
+        .logout-btn:hover {
+            background: var(--primary-black);
+            color: var(--pure-white);
+        }
+
+        /* Main Content */
         .main-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem 1rem;
+            padding: 2rem;
         }
 
         /* Welcome Banner */
         .welcome-banner {
-            background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral));
-            padding: 2rem;
-            border-radius: 15px;
+            background: linear-gradient(135deg, var(--primary-black), #2C3E50);
+            padding: 3rem;
+            border-radius: 24px;
             margin-bottom: 2rem;
-            color: var(--primary-black);
+            color: var(--pure-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1));
+            transform: skewX(-20deg) translateX(200px);
         }
 
         .welcome-banner h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
         }
 
-        /* Pastor's Video Section */
+        .welcome-banner p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Pastor's Video */
         .pastor-video {
-            background-color: var(--soft-gray);
+            background: var(--pure-white);
+            border-radius: 24px;
             padding: 2rem;
-            border-radius: 15px;
             margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
         }
 
         .video-container {
@@ -282,8 +356,8 @@
             padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
-            border-radius: 10px;
-            margin-top: 1rem;
+            border-radius: 16px;
+            margin-top: 1.5rem;
         }
 
         .video-container iframe {
@@ -294,43 +368,74 @@
             height: 100%;
         }
 
-        /* Recent Sermons */
+        /* Section Titles */
         .section-title {
-            font-size: 1.8rem;
+            font-size: 2rem;
             margin-bottom: 1.5rem;
             color: var(--primary-black);
-            border-left: 5px solid var(--accent-gold);
+            font-weight: 600;
+            position: relative;
             padding-left: 1rem;
         }
 
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--gradient-gold);
+            border-radius: 2px;
+        }
+
+        /* Sermons Grid */
         .sermons-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
 
         .sermon-card {
             background: var(--pure-white);
-            border: 2px solid var(--primary-black);
-            border-radius: 10px;
+            border-radius: 16px;
             overflow: hidden;
-            transition: transform 0.3s;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .sermon-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-lg);
         }
 
         .sermon-image {
-            height: 150px;
-            background: linear-gradient(45deg, var(--accent-purple), var(--accent-teal));
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .sermon-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.7));
             display: flex;
-            justify-content: center;
-            align-items: center;
+            align-items: flex-end;
+            padding: 1rem;
+        }
+
+        .sermon-category {
+            background: var(--accent-gold);
             color: var(--pure-white);
-            font-size: 3rem;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
         }
 
         .sermon-content {
@@ -339,61 +444,82 @@
 
         .sermon-title {
             font-size: 1.2rem;
-            font-weight: bold;
+            font-weight: 600;
             margin-bottom: 0.5rem;
+            color: var(--primary-black);
         }
 
-        .sermon-date {
+        .sermon-meta {
+            display: flex;
+            justify-content: space-between;
             color: var(--text-dark);
             font-size: 0.9rem;
             margin-bottom: 1rem;
         }
 
         .play-btn {
-            background-color: var(--primary-black);
+            background: var(--primary-black);
             color: var(--pure-white);
             border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
+            padding: 0.8rem;
+            border-radius: 8px;
             cursor: pointer;
             width: 100%;
+            font-weight: 500;
+            transition: background 0.2s;
         }
 
-        /* Ministry Buttons */
-        .ministry-buttons {
+        .play-btn:hover {
+            background: var(--accent-gold);
+        }
+
+        /* Projects Grid */
+        .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
 
-        .ministry-btn {
-            background: linear-gradient(135deg, var(--primary-black), var(--accent-purple));
-            color: var(--pure-white);
-            border: none;
-            padding: 1.5rem;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            font-weight: bold;
+        .project-card {
+            background: var(--pure-white);
+            border-radius: 16px;
+            overflow: hidden;
             cursor: pointer;
             transition: transform 0.3s;
-            text-align: center;
+            box-shadow: var(--shadow-sm);
         }
 
-        .ministry-btn:hover {
-            transform: scale(1.05);
+        .project-card:hover {
+            transform: scale(1.03);
         }
 
-        .ministry-btn i {
-            font-size: 2rem;
+        .project-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-info h3 {
             margin-bottom: 0.5rem;
-            display: block;
+            color: var(--primary-black);
         }
 
-        /* Ministry Pages */
+        .project-info p {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        /* Ministry Page */
         .ministry-page {
             display: none;
-            padding: 2rem 1rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .ministry-page.active {
@@ -401,140 +527,268 @@
         }
 
         .back-btn {
-            background: var(--primary-black);
-            color: var(--pure-white);
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 5px;
+            background: var(--pure-white);
+            color: var(--primary-black);
+            border: 2px solid var(--primary-black);
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
             cursor: pointer;
             margin-bottom: 2rem;
             font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.2s;
         }
 
-        /* Materials Grid */
-        .materials-grid {
+        .back-btn:hover {
+            background: var(--primary-black);
+            color: var(--pure-white);
+        }
+
+        /* Ministry Cards */
+        .ministry-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
 
-        .material-category {
-            border: 2px solid var(--primary-black);
-            border-radius: 10px;
-            padding: 1.5rem;
-        }
-
-        .material-category h3 {
-            margin-bottom: 1rem;
-            color: var(--primary-black);
-            border-bottom: 2px solid var(--accent-gold);
-            padding-bottom: 0.5rem;
-        }
-
-        .material-item {
-            padding: 1rem;
-            border: 1px solid #ddd;
-            margin-bottom: 1rem;
-            border-radius: 5px;
+        .ministry-card {
+            background: var(--pure-white);
+            border-radius: 16px;
+            overflow: hidden;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-sm);
         }
 
-        .material-item:hover {
-            background-color: var(--soft-gray);
+        .ministry-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .material-item.video { border-left: 5px solid var(--accent-coral); }
-        .material-item.audio { border-left: 5px solid var(--accent-teal); }
-        .material-item.written { border-left: 5px solid var(--accent-purple); }
+        .ministry-card-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
 
-        /* Projects Section */
-        .projects-grid {
+        .ministry-card-content {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .ministry-card-content h3 {
+            color: var(--primary-black);
+            margin-bottom: 0.5rem;
+        }
+
+        .ministry-card-content p {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        /* Materials Grid */
+        .materials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
 
-        .project-card {
-            border: 2px solid var(--primary-black);
-            border-radius: 10px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .project-card:hover {
-            transform: scale(1.02);
-        }
-
-        .project-preview {
-            height: 200px;
-            background: linear-gradient(45deg, var(--accent-gold), var(--accent-coral));
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 3rem;
-        }
-
-        .project-info {
+        .material-category {
+            background: var(--pure-white);
+            border-radius: 16px;
             padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
         }
 
-        /* Project Modal */
-        .project-modal {
+        .material-category h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-black);
+            font-size: 1.3rem;
+            border-bottom: 3px solid var(--accent-gold);
+            padding-bottom: 0.5rem;
+        }
+
+        .material-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border: 1px solid #E0E0E0;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .material-item:hover {
+            background: var(--soft-gray);
+            transform: translateX(5px);
+        }
+
+        .material-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background-size: cover;
+        }
+
+        .material-info {
+            flex: 1;
+        }
+
+        .material-info strong {
+            display: block;
+            color: var(--primary-black);
+            margin-bottom: 0.2rem;
+        }
+
+        .material-info small {
+            color: var(--text-dark);
+            opacity: 0.7;
+        }
+
+        /* Bible Study Chat */
+        .chat-container {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0,0,0,0.9);
-            z-index: 2200;
+            background: var(--pure-white);
+            z-index: 2000;
+        }
+
+        .chat-container.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background: var(--primary-black);
+            color: var(--pure-white);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 2rem;
             overflow-y: auto;
         }
 
-        .project-modal.active {
+        .message {
+            margin-bottom: 1rem;
             display: flex;
+            gap: 1rem;
+        }
+
+        .message.sent {
+            justify-content: flex-end;
+        }
+
+        .message-content {
+            max-width: 60%;
+            padding: 1rem;
+            border-radius: 16px;
+            background: var(--soft-gray);
+        }
+
+        .message.sent .message-content {
+            background: var(--gradient-gold);
+            color: var(--pure-white);
+        }
+
+        .chat-input-area {
+            padding: 1rem 2rem;
+            border-top: 1px solid #E0E0E0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #E0E0E0;
+            border-radius: 25px;
+            font-size: 1rem;
+        }
+
+        .chat-send-btn {
+            background: var(--gradient-gold);
+            color: var(--pure-white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .invite-btn {
+            background: var(--pure-white);
+            color: var(--primary-black);
+            border: 2px solid var(--pure-white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+
+        /* Profile Modal */
+        .profile-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            z-index: 2200;
             justify-content: center;
             align-items: center;
         }
 
-        .project-modal-content {
+        .profile-modal.active {
+            display: flex;
+        }
+
+        .profile-content {
             background: var(--pure-white);
-            max-width: 800px;
+            padding: 2.5rem;
+            border-radius: 24px;
+            max-width: 500px;
             width: 90%;
-            border-radius: 15px;
-            padding: 2rem;
         }
 
-        .media-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
+        .profile-picture-upload {
+            text-align: center;
+            margin-bottom: 2rem;
         }
 
-        .media-item {
-            border: 2px solid var(--primary-black);
-            border-radius: 5px;
-            overflow: hidden;
+        .profile-preview {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--soft-gray);
+            margin: 0 auto 1rem;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid var(--accent-gold);
         }
 
-        .media-item img, .media-item video {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-        }
-
-        /* Navigation Bar */
+        /* Bottom Navigation */
         .bottom-nav {
-            background: linear-gradient(135deg, var(--primary-black), var(--accent-purple));
-            padding: 1rem;
+            background: var(--pure-white);
+            padding: 1rem 2rem;
             position: sticky;
             bottom: 0;
             z-index: 100;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
         }
 
         .nav-items {
@@ -545,56 +799,81 @@
         }
 
         .nav-item {
-            color: var(--pure-white);
+            color: var(--text-dark);
             text-decoration: none;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 0.3rem;
             cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.2s;
         }
 
         .nav-item.active {
-            color: var(--accent-gold);
+            background: var(--gradient-gold);
+            color: var(--pure-white);
         }
 
         .nav-item i {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
+            font-style: normal;
         }
 
-        @keyframes slideUp {
+        /* Animations */
+        @keyframes fadeInUp {
             from {
-                transform: translateY(50px);
                 opacity: 0;
+                transform: translateY(30px);
             }
             to {
-                transform: translateY(0);
                 opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        /* Responsive Design */
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
             .splash-buttons {
                 flex-direction: column;
             }
             
-            .ministry-buttons {
-                grid-template-columns: 1fr 1fr;
+            .welcome-banner h1 {
+                font-size: 1.8rem;
+            }
+            
+            .app-header {
+                padding: 1rem;
+            }
+            
+            .app-logo-text {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Splash Screen / Welcome Popup -->
+    <!-- Splash Screen -->
     <div class="splash-overlay" id="splashOverlay">
         <div class="splash-content">
-            <div class="splash-logo">TT</div>
+            <div class="splash-logo">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/%3E%3C/svg%3E" alt="The Table">
+            </div>
             <h2>Welcome to The Table</h2>
-            <p>Join our community where everyone has a place at God's table.</p>
+            <p>Where everyone has a place at God's table</p>
             <div class="splash-buttons">
-                <button class="splash-btn signup" onclick="showSignup()">Sign Up</button>
-                <button class="splash-btn login" onclick="showLogin()">Log In</button>
+                <button class="splash-btn signup" onclick="showSignup()">Create Account</button>
+                <button class="splash-btn login" onclick="showLogin()">Sign In</button>
             </div>
         </div>
     </div>
@@ -603,12 +882,13 @@
     <div class="auth-modal" id="signupModal">
         <span class="close-btn" onclick="closeModals()">&times;</span>
         <div class="auth-content">
-            <h2>Create Account</h2>
+            <h2>Join The Table</h2>
             <input type="text" class="auth-input" placeholder="Full Name" id="signupName">
             <input type="email" class="auth-input" placeholder="Email" id="signupEmail">
             <input type="password" class="auth-input" placeholder="Password" id="signupPassword">
-            <button class="auth-btn" onclick="handleSignup()">Sign Up</button>
-            <p>Already have an account? <a href="#" onclick="switchToLogin()">Log In</a></p>
+            <input type="text" class="auth-input" placeholder="Prayer Request / Topic" id="signupTopic">
+            <button class="auth-btn" onclick="handleSignup()">Create Account</button>
+            <p>Already have an account? <a href="#" onclick="switchToLogin()">Sign In</a></p>
         </div>
     </div>
 
@@ -619,20 +899,48 @@
             <h2>Welcome Back</h2>
             <input type="email" class="auth-input" placeholder="Email" id="loginEmail">
             <input type="password" class="auth-input" placeholder="Password" id="loginPassword">
-            <button class="auth-btn" onclick="handleLogin()">Log In</button>
+            <button class="auth-btn" onclick="handleLogin()">Sign In</button>
             <p>New here? <a href="#" onclick="switchToSignup()">Create Account</a></p>
         </div>
     </div>
 
-    <!-- Project Modal -->
-    <div class="project-modal" id="projectModal">
-        <div class="project-modal-content">
-            <span class="close-btn" onclick="closeProjectModal()" style="color: var(--primary-black);">&times;</span>
-            <h2 id="projectTitle">Project Title</h2>
-            <p id="projectDescription">Project description goes here...</p>
-            <div class="media-gallery" id="projectMedia">
-                <!-- Media items will be inserted here -->
+    <!-- Profile Modal -->
+    <div class="profile-modal" id="profileModal">
+        <div class="profile-content">
+            <span class="close-btn" onclick="closeProfileModal()" style="color: var(--primary-black); position: relative; float: right;">&times;</span>
+            <h2 style="margin-bottom: 2rem;">Profile Settings</h2>
+            
+            <div class="profile-picture-upload">
+                <div class="profile-preview" id="profilePreview"></div>
+                <input type="file" id="profilePicture" accept="image/*" style="display: none;">
+                <button class="auth-btn" onclick="document.getElementById('profilePicture').click()" style="width: auto; padding: 0.5rem 2rem;">Change Photo</button>
             </div>
+            
+            <div class="form-group">
+                <input type="text" class="auth-input" placeholder="Full Name" id="profileName">
+                <input type="password" class="auth-input" placeholder="New Password" id="profilePassword">
+                <input type="password" class="auth-input" placeholder="Confirm Password" id="profileConfirmPassword">
+            </div>
+            
+            <button class="auth-btn" onclick="updateProfile()">Save Changes</button>
+        </div>
+    </div>
+
+    <!-- Bible Study Chat -->
+    <div class="chat-container" id="chatContainer">
+        <div class="chat-header">
+            <h3>Bible Study: Book of John</h3>
+            <div>
+                <button class="invite-btn" onclick="inviteToStudy()">➕ Invite</button>
+                <button class="invite-btn" onclick="closeChat()">✕ Close</button>
+            </div>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <!-- Messages will appear here -->
+        </div>
+        <div class="chat-input-area">
+            <input type="text" class="chat-input" placeholder="Type a message..." id="chatInput">
+            <button class="chat-send-btn" onclick="sendMessage()">Send</button>
         </div>
     </div>
 
@@ -642,282 +950,284 @@
         <header class="app-header">
             <div class="header-content">
                 <div class="app-logo">
-                    <div class="app-logo-icon">TT</div>
+                    <div class="app-logo-icon">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/%3E%3C/svg%3E" alt="The Table">
+                    </div>
                     <span class="app-logo-text">The Table</span>
                 </div>
                 <div class="user-menu">
-                    <div class="user-avatar" id="userAvatar">U</div>
-                    <button class="logout-btn" onclick="logout()">Logout</button>
+                    <div class="user-avatar" id="userAvatar" onclick="showProfileModal()">U</div>
+                    <button class="logout-btn" onclick="logout()">Sign Out</button>
                 </div>
             </div>
         </header>
 
-        <!-- Main Content Area -->
+        <!-- Main Content Area (Home) -->
         <div class="main-content" id="mainContent">
             <!-- Welcome Banner -->
             <div class="welcome-banner">
                 <h1 id="welcomeMessage">Welcome back, <span id="userName">Friend</span>!</h1>
-                <p>We're glad you're here. Explore our latest content and connect with our community.</p>
+                <p>We're glad you're here. Let's grow together in faith.</p>
+                <button class="invite-btn" onclick="openBibleStudy()" style="margin-top: 1rem; background: var(--pure-white);">Connect with Friends in the Word</button>
             </div>
 
             <!-- Pastor's Video -->
             <div class="pastor-video">
-                <h2 class="section-title">A Message From Pastor</h2>
+                <h2 class="section-title">A Word from Pastor</h2>
                 <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/your-pastor-video-id" frameborder="0" allowfullscreen></iframe>
                 </div>
-            </div>
-
-            <!-- New Here Section -->
-            <div class="pastor-video" style="background: linear-gradient(135deg, var(--accent-sage), var(--accent-teal));">
-                <h2 class="section-title">New to The Table?</h2>
-                <p>Welcome! We'd love to connect with you and help you find your place in our church family.</p>
-                <button class="ministry-btn" onclick="showNewHere()" style="margin-top: 1rem; background: var(--primary-black);">Connect With Us →</button>
-            </div>
-
-            <!-- Ministry Navigation Buttons -->
-            <h2 class="section-title">Our Ministries</h2>
-            <div class="ministry-buttons">
-                <button class="ministry-btn" onclick="showMinistry('sunday-school')">
-                    <i>📚</i>
-                    Sunday School
-                </button>
-                <button class="ministry-btn" onclick="showMinistry('youth')">
-                    <i>🔥</i>
-                    Youth
-                </button>
-                <button class="ministry-btn" onclick="showMinistry('couples')">
-                    <i>💑</i>
-                    Couples
-                </button>
             </div>
 
             <!-- Recent Sermons -->
             <h2 class="section-title">Recent Sermons</h2>
-            <div class="sermons-grid">
-                <div class="sermon-card">
-                    <div class="sermon-image">🎧</div>
-                    <div class="sermon-content">
-                        <div class="sermon-title">The Power of Unity</div>
-                        <div class="sermon-date">March 10, 2024</div>
-                        <button class="play-btn">Play Sermon</button>
-                    </div>
-                </div>
-                <div class="sermon-card">
-                    <div class="sermon-image">🎧</div>
-                    <div class="sermon-content">
-                        <div class="sermon-title">Walking in Faith</div>
-                        <div class="sermon-date">March 3, 2024</div>
-                        <button class="play-btn">Play Sermon</button>
-                    </div>
-                </div>
-                <div class="sermon-card">
-                    <div class="sermon-image">🎧</div>
-                    <div class="sermon-content">
-                        <div class="sermon-title">The Armor of God</div>
-                        <div class="sermon-date">February 25, 2024</div>
-                        <button class="play-btn">Play Sermon</button>
-                    </div>
-                </div>
+            <div class="sermons-grid" id="sermonsGrid">
+                <!-- Sermons loaded dynamically -->
             </div>
 
             <!-- Recent Projects -->
             <h2 class="section-title">Recent Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card" onclick="showProject('childrens-ministry')">
-                    <div class="project-preview">🏫</div>
-                    <div class="project-info">
-                        <h3>Children's Ministry Renovation</h3>
-                        <p>Click to see photos and videos of our renovation project</p>
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Projects loaded dynamically -->
+            </div>
+        </div>
+
+        <!-- Ministries Page -->
+        <div class="ministry-page" id="ministriesPage">
+            <button class="back-btn" onclick="goToHome()">← Back to Home</button>
+            <h2 class="section-title">Our Ministries</h2>
+            <div class="ministry-cards">
+                <div class="ministry-card" onclick="showMinistryDetails('sunday-school')">
+                    <div class="ministry-card-image" style="background-image: url('https://images.unsplash.com/photo-1503919545889-a0f64ad6c9bc?w=500')"></div>
+                    <div class="ministry-card-content">
+                        <h3>Sunday School</h3>
+                        <p>Nurturing faith in our children</p>
                     </div>
                 </div>
-                <div class="project-card" onclick="showProject('food-pantry')">
-                    <div class="project-preview">🥫</div>
-                    <div class="project-info">
-                        <h3>Community Food Pantry</h3>
-                        <p>See how we're serving our community</p>
+                <div class="ministry-card" onclick="showMinistryDetails('youth')">
+                    <div class="ministry-card-image" style="background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500')"></div>
+                    <div class="ministry-card-content">
+                        <h3>Youth Ministry</h3>
+                        <p>Empowering the next generation</p>
                     </div>
                 </div>
-                <div class="project-card" onclick="showProject('mission-trip')">
-                    <div class="project-preview">🌍</div>
-                    <div class="project-info">
-                        <h3>Mexico Mission Trip</h3>
-                        <p>Photos and videos from our mission trip</p>
+                <div class="ministry-card" onclick="showMinistryDetails('couples')">
+                    <div class="ministry-card-image" style="background-image: url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=500')"></div>
+                    <div class="ministry-card-content">
+                        <h3>Couples Ministry</h3>
+                        <p>Strengthening marriages</p>
+                    </div>
+                </div>
+                <div class="ministry-card" onclick="showMinistryDetails('worship')">
+                    <div class="ministry-card-image" style="background-image: url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=500')"></div>
+                    <div class="ministry-card-content">
+                        <h3>Worship Team</h3>
+                        <p>Leading in praise</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Ministry Pages -->
-        <!-- Sunday School Page -->
-        <div class="ministry-page" id="sunday-school-page">
-            <button class="back-btn" onclick="goBack()">← Back to Home</button>
-            <h2 class="section-title">Sunday School Ministry</h2>
+        <!-- Sermons Page -->
+        <div class="ministry-page" id="sermonsPage">
+            <button class="back-btn" onclick="goToHome()">← Back to Home</button>
+            <h2 class="section-title">All Sermons</h2>
+            <div class="sermons-grid" id="allSermonsGrid"></div>
+        </div>
+
+        <!-- Projects Page -->
+        <div class="ministry-page" id="projectsPage">
+            <button class="back-btn" onclick="goToHome()">← Back to Home</button>
+            <h2 class="section-title">All Projects</h2>
+            <div class="projects-grid" id="allProjectsGrid"></div>
+        </div>
+
+        <!-- Events Page -->
+        <div class="ministry-page" id="eventsPage">
+            <button class="back-btn" onclick="goToHome()">← Back to Home</button>
+            <h2 class="section-title">Upcoming Events</h2>
+            <div class="events-list" id="eventsList"></div>
+        </div>
+
+        <!-- Ministry Details Pages -->
+        <div class="ministry-page" id="sunday-school-details">
+            <button class="back-btn" onclick="goToMinistries()">← Back to Ministries</button>
+            <h2 class="section-title">Sunday School</h2>
             
             <div class="materials-grid">
                 <div class="material-category">
-                    <h3>🎥 Video Lessons</h3>
-                    <div class="material-item video" onclick="playVideo('The Creation Story')">
-                        <strong>The Creation Story</strong><br>
-                        <small>Ages 4-7 • 15 mins</small>
+                    <h3>Video Lessons</h3>
+                    <div class="material-item" onclick="playVideo('creation-story')">
+                        <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1485846234645-a62644f84728?w=100')"></div>
+                        <div class="material-info">
+                            <strong>The Creation Story</strong>
+                            <small>Lesson 1 • 15 mins</small>
+                        </div>
                     </div>
-                    <div class="material-item video" onclick="playVideo('Noah's Ark')">
-                        <strong>Noah's Ark</strong><br>
-                        <small>Ages 8-12 • 20 mins</small>
-                    </div>
-                </div>
-                
-                <div class="material-category">
-                    <h3>🎵 Audio Lessons</h3>
-                    <div class="material-item audio" onclick="playAudio('Memory Verses Song')">
-                        <strong>Memory Verses Song</strong><br>
-                        <small>All ages • 5 mins</small>
-                    </div>
-                    <div class="material-item audio" onclick="playAudio('Bible Stories for Kids')">
-                        <strong>Bible Stories for Kids</strong><br>
-                        <small>30 mins</small>
+                    <div class="material-item" onclick="playVideo('noahs-ark')">
+                        <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=100')"></div>
+                        <div class="material-info">
+                            <strong>Noah's Ark</strong>
+                            <small>Lesson 2 • 20 mins</small>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="material-category">
-                    <h3>📖 Written Materials</h3>
-                    <div class="material-item written" onclick="downloadPDF('Lesson 1: Creation')">
-                        <strong>Lesson 1: Creation</strong><br>
-                        <small>Download PDF</small>
+                    <h3>Audio Lessons</h3>
+                    <div class="material-item" onclick="playAudio('memory-verses')">
+                        <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=100')"></div>
+                        <div class="material-info">
+                            <strong>Memory Verses</strong>
+                            <small>Sing-along • 10 mins</small>
+                        </div>
                     </div>
-                    <div class="material-item written" onclick="downloadPDF('Activity Sheets')">
-                        <strong>Activity Sheets</strong><br>
-                        <small>Print at home</small>
+                    <div class="material-item" onclick="playAudio('bible-stories')">
+                        <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=100')"></div>
+                        <div class="material-info">
+                            <strong>Bible Stories</strong>
+                            <small>Collection • 30 mins</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="material-category">
+                    <h3>Worksheets</h3>
+                    <div class="material-item" onclick="downloadPDF('lesson1-worksheet')">
+                        <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1455390582262-044cdead277a?w=100')"></div>
+                        <div class="material-info">
+                            <strong>Lesson 1 Worksheet</strong>
+                            <small>PDF • Ages 4-7</small>
+                        </div>
+                    </div>
+                    <div class="material-item" onclick="downloadPDF('activity-sheets')">
+                        <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=100')"></div>
+                        <div class="material-info">
+                            <strong>Activity Sheets</strong>
+                            <small>PDF • Coloring pages</small>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Youth Page -->
-        <div class="ministry-page" id="youth-page">
-            <button class="back-btn" onclick="goBack()">← Back to Home</button>
+        <div class="ministry-page" id="youth-details">
+            <button class="back-btn" onclick="goToMinistries()">← Back to Ministries</button>
             <h2 class="section-title">Youth Ministry</h2>
             
             <div class="materials-grid">
                 <div class="material-category">
-                    <h3>🎥 Video Series</h3>
-                    <div class="material-item video" onclick="playVideo('Identity in Christ')">
-                        <strong>Identity in Christ</strong><br>
-                        <small>Week 1 • 25 mins</small>
+                    <h3>Video Series</h3>
+                    <div class="material-item" onclick="playVideo('identity-in-christ')">
+                        <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=100')"></div>
+                        <div class="material-info">
+                            <strong>Identity in Christ</strong>
+                            <small>Week 1 • 25 mins</small>
+                        </div>
                     </div>
-                    <div class="material-item video" onclick="playVideo('Living for God')">
-                        <strong>Living for God</strong><br>
-                        <small>Week 2 • 22 mins</small>
-                    </div>
-                </div>
-                
-                <div class="material-category">
-                    <h3>🎵 Worship Sets</h3>
-                    <div class="material-item audio" onclick="playAudio('Youth Worship Night')">
-                        <strong>Youth Worship Night</strong><br>
-                        <small>Full set • 45 mins</small>
-                    </div>
-                    <div class="material-item audio" onclick="playAudio('Praise and Worship')">
-                        <strong>Praise and Worship</strong><br>
-                        <small>30 mins</small>
+                    <div class="material-item" onclick="playVideo('living-with-purpose')">
+                        <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=100')"></div>
+                        <div class="material-info">
+                            <strong>Living with Purpose</strong>
+                            <small>Week 2 • 22 mins</small>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="material-category">
-                    <h3>📖 Study Guides</h3>
-                    <div class="material-item written" onclick="downloadPDF('Youth Study Guide Week 1')">
-                        <strong>Study Guide Week 1</strong><br>
-                        <small>Download PDF</small>
+                    <h3>Worship</h3>
+                    <div class="material-item" onclick="playAudio('youth-worship')">
+                        <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=100')"></div>
+                        <div class="material-info">
+                            <strong>Youth Worship Night</strong>
+                            <small>Live recording • 45 mins</small>
+                        </div>
                     </div>
-                    <div class="material-item written" onclick="downloadPDF('Discussion Questions')">
-                        <strong>Discussion Questions</strong><br>
-                        <small>Small group guide</small>
+                    <div class="material-item" onclick="playAudio('praise-songs')">
+                        <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=100')"></div>
+                        <div class="material-info">
+                            <strong>Praise & Worship</strong>
+                            <small>Playlist • 60 mins</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="material-category">
+                    <h3>Study Guides</h3>
+                    <div class="material-item" onclick="downloadPDF('youth-guide-week1')">
+                        <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1455390582262-044cdead277a?w=100')"></div>
+                        <div class="material-info">
+                            <strong>Study Guide Week 1</strong>
+                            <small>PDF • Discussion questions</small>
+                        </div>
+                    </div>
+                    <div class="material-item" onclick="downloadPDF('devotional-guide')">
+                        <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?w=100')"></div>
+                        <div class="material-info">
+                            <strong>30-Day Devotional</strong>
+                            <small>PDF • Daily readings</small>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Couples Page -->
-        <div class="ministry-page" id="couples-page">
-            <button class="back-btn" onclick="goBack()">← Back to Home</button>
+        <div class="ministry-page" id="couples-details">
+            <button class="back-btn" onclick="goToMinistries()">← Back to Ministries</button>
             <h2 class="section-title">Couples Ministry</h2>
             
             <div class="materials-grid">
                 <div class="material-category">
-                    <h3>🎥 Marriage Videos</h3>
-                    <div class="material-item video" onclick="playVideo('Building Strong Foundations')">
-                        <strong>Building Strong Foundations</strong><br>
-                        <small>Session 1 • 35 mins</small>
+                    <h3>Marriage Videos</h3>
+                    <div class="material-item" onclick="playVideo('building-foundations')">
+                        <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=100')"></div>
+                        <div class="material-info">
+                            <strong>Building Strong Foundations</strong>
+                            <small>Session 1 • 35 mins</small>
+                        </div>
                     </div>
-                    <div class="material-item video" onclick="playVideo('Communication in Marriage')">
-                        <strong>Communication in Marriage</strong><br>
-                        <small>Session 2 • 30 mins</small>
-                    </div>
-                </div>
-                
-                <div class="material-category">
-                    <h3>🎵 Date Night Ideas</h3>
-                    <div class="material-item audio" onclick="playAudio('Romantic Worship Playlist')">
-                        <strong>Romantic Worship Playlist</strong><br>
-                        <small>60 mins</small>
-                    </div>
-                    <div class="material-item audio" onclick="playAudio('Prayer for Couples')">
-                        <strong>Prayer for Couples</strong><br>
-                        <small>15 mins</small>
+                    <div class="material-item" onclick="playVideo('communication')">
+                        <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=100')"></div>
+                        <div class="material-info">
+                            <strong>Communication in Marriage</strong>
+                            <small>Session 2 • 30 mins</small>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="material-category">
-                    <h3>📖 Resources</h3>
-                    <div class="material-item written" onclick="downloadPDF('Marriage Devotional')">
-                        <strong>30-Day Marriage Devotional</strong><br>
-                        <small>Download PDF</small>
+                    <h3>Podcasts</h3>
+                    <div class="material-item" onclick="playAudio('date-night-ideas')">
+                        <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=100')"></div>
+                        <div class="material-info">
+                            <strong>Creative Date Night Ideas</strong>
+                            <small>Podcast • 25 mins</small>
+                        </div>
                     </div>
-                    <div class="material-item written" onclick="downloadPDF('Date Night Ideas')">
-                        <strong>50 Date Night Ideas</strong><br>
-                        <small>PDF guide</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- New Here Page -->
-        <div class="ministry-page" id="newhere-page">
-            <button class="back-btn" onclick="goBack()">← Back to Home</button>
-            <h2 class="section-title">Welcome to The Table!</h2>
-            
-            <div style="max-width: 600px; margin: 0 auto;">
-                <div class="material-category" style="margin-bottom: 2rem;">
-                    <h3>Get Connected</h3>
-                    <p>We're so glad you're here! Fill out this form and someone will reach out to you within 24 hours.</p>
-                    
-                    <div class="form-group" style="margin-top: 1rem;">
-                        <input type="text" class="auth-input" placeholder="Your Name" id="newName">
-                        <input type="email" class="auth-input" placeholder="Your Email" id="newEmail">
-                        <input type="tel" class="auth-input" placeholder="Phone Number" id="newPhone">
-                        <select class="auth-input" id="newInterest">
-                            <option>I want to learn about faith</option>
-                            <option>I want to become a member</option>
-                            <option>I'm interested in baptism</option>
-                            <option>I want to join a small group</option>
-                        </select>
-                        <button class="auth-btn" onclick="submitNewHere()">Connect With Us</button>
+                    <div class="material-item" onclick="playAudio('praying-together')">
+                        <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1476231791107-3ac0e77f5162?w=100')"></div>
+                        <div class="material-info">
+                            <strong>Praying Together</strong>
+                            <small>Guided prayer • 15 mins</small>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="material-category">
-                    <h3>Next Steps</h3>
-                    <div class="material-item">
-                        <strong>1. Welcome Lunch</strong><br>
-                        <small>Join us after service this Sunday</small>
+                    <h3>Resources</h3>
+                    <div class="material-item" onclick="downloadPDF('marriage-devotional')">
+                        <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?w=100')"></div>
+                        <div class="material-info">
+                            <strong>30-Day Marriage Devotional</strong>
+                            <small>PDF • Daily readings</small>
+                        </div>
                     </div>
-                    <div class="material-item">
-                        <strong>2. Discover The Table Class</strong><br>
-                        <small>4-week class about our church</small>
-                    </div>
-                    <div class="material-item">
-                        <strong>3. Baptism Class</strong><br>
-                        <small>Learn about baptism</small>
+                    <div class="material-item" onclick="downloadPDF('date-night-guide')">
+                        <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=100')"></div>
+                        <div class="material-info">
+                            <strong>52 Date Night Ideas</strong>
+                            <small>PDF • Creative ideas</small>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -930,13 +1240,13 @@
                     <i>🏠</i>
                     <span>Home</span>
                 </div>
-                <div class="nav-item" onclick="navigateTo('sermons')">
-                    <i>🎧</i>
-                    <span>Sermons</span>
-                </div>
                 <div class="nav-item" onclick="navigateTo('ministries')">
                     <i>🙏</i>
                     <span>Ministries</span>
+                </div>
+                <div class="nav-item" onclick="navigateTo('sermons')">
+                    <i>📖</i>
+                    <span>Sermons</span>
                 </div>
                 <div class="nav-item" onclick="navigateTo('projects')">
                     <i>📸</i>
@@ -954,99 +1264,125 @@
         // User state
         let currentUser = null;
         let currentPage = 'home';
+        let bibleStudyMessages = [];
 
-        // Show signup modal
-        function showSignup() {
-            document.getElementById('splashOverlay').style.display = 'none';
-            document.getElementById('signupModal').classList.add('active');
-        }
-
-        // Show login modal
-        function showLogin() {
-            document.getElementById('splashOverlay').style.display = 'none';
-            document.getElementById('loginModal').classList.add('active');
-        }
-
-        // Close all modals
-        function closeModals() {
-            document.getElementById('signupModal').classList.remove('active');
-            document.getElementById('loginModal').classList.remove('active');
-            document.getElementById('splashOverlay').style.display = 'flex';
-        }
-
-        // Switch to login from signup
-        function switchToLogin() {
-            document.getElementById('signupModal').classList.remove('active');
-            document.getElementById('loginModal').classList.add('active');
-        }
-
-        // Switch to signup from login
-        function switchToSignup() {
-            document.getElementById('loginModal').classList.remove('active');
-            document.getElementById('signupModal').classList.add('active');
-        }
-
-        // Handle signup
-        function handleSignup() {
-            const name = document.getElementById('signupName').value;
-            const email = document.getElementById('signupEmail').value;
-            const password = document.getElementById('signupPassword').value;
-
-            if (name && email && password) {
-                // In a real app, this would send to a backend
-                currentUser = { name, email };
-                localStorage.setItem('user', JSON.stringify(currentUser));
-                
-                document.getElementById('signupModal').classList.remove('active');
-                document.getElementById('appContainer').classList.add('active');
-                document.getElementById('userName').textContent = name.split(' ')[0];
-                document.getElementById('userAvatar').textContent = name.charAt(0).toUpperCase();
-                
-                alert('Welcome to The Table! Check your email for confirmation.');
-            } else {
-                alert('Please fill in all fields');
+        // Sample data
+        const sermons = [
+            {
+                id: 1,
+                title: "The Power of Unity",
+                date: "March 10, 2024",
+                speaker: "Pastor John",
+                image: "https://images.unsplash.com/photo-1476231791107-3ac0e77f5162?w=500",
+                videoUrl: "sermon1.mp4",
+                transcript: "Full transcript here..."
+            },
+            {
+                id: 2,
+                title: "Walking in Faith",
+                date: "March 3, 2024",
+                speaker: "Pastor Sarah",
+                image: "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=500",
+                videoUrl: "sermon2.mp4",
+                transcript: "Full transcript here..."
+            },
+            {
+                id: 3,
+                title: "The Armor of God",
+                date: "February 25, 2024",
+                speaker: "Pastor Mike",
+                image: "https://images.unsplash.com/photo-1449585310878-54e6e7c4e5ab?w=500",
+                videoUrl: "sermon3.mp4",
+                transcript: "Full transcript here..."
             }
-        }
+        ];
 
-        // Handle login
-        function handleLogin() {
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-
-            if (email && password) {
-                // In a real app, this would verify with backend
-                currentUser = { name: 'Friend', email };
-                localStorage.setItem('user', JSON.stringify(currentUser));
-                
-                document.getElementById('loginModal').classList.remove('active');
-                document.getElementById('appContainer').classList.add('active');
-                document.getElementById('userName').textContent = 'Friend';
-                document.getElementById('userAvatar').textContent = 'F';
-                
-                alert('Welcome back!');
-            } else {
-                alert('Please fill in all fields');
+        const projects = [
+            {
+                id: 1,
+                title: "Children's Ministry Renovation",
+                description: "Creating a safe, engaging environment for our kids",
+                image: "https://images.unsplash.com/photo-1503919545889-a0f64ad6c9bc?w=500",
+                media: ["photo1.jpg", "photo2.jpg", "video1.mp4"]
+            },
+            {
+                id: 2,
+                title: "Community Food Pantry",
+                description: "Serving over 100 families weekly",
+                image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=500",
+                media: ["pantry1.jpg", "pantry2.jpg", "video2.mp4"]
+            },
+            {
+                id: 3,
+                title: "Mexico Mission Trip",
+                description: "Building homes and sharing the gospel",
+                image: "https://images.unsplash.com/photo-1489396729940-b7c1e7d9f61b?w=500",
+                media: ["mission1.jpg", "mission2.jpg", "video3.mp4"]
             }
-        }
+        ];
 
-        // Check for existing session
+        // Initialize app
         window.onload = function() {
             const savedUser = localStorage.getItem('user');
             if (savedUser) {
                 currentUser = JSON.parse(savedUser);
                 document.getElementById('splashOverlay').style.display = 'none';
                 document.getElementById('appContainer').classList.add('active');
-                document.getElementById('userName').textContent = currentUser.name.split(' ')[0];
-                document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
+                updateUserInterface();
+                loadContent();
             }
         };
 
-        // Logout
-        function logout() {
-            localStorage.removeItem('user');
-            currentUser = null;
-            document.getElementById('appContainer').classList.remove('active');
-            document.getElementById('splashOverlay').style.display = 'flex';
+        // Update user interface
+        function updateUserInterface() {
+            if (currentUser) {
+                document.getElementById('userName').textContent = currentUser.name.split(' ')[0];
+                document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
+                if (currentUser.avatar) {
+                    document.getElementById('userAvatar').style.backgroundImage = `url(${currentUser.avatar})`;
+                    document.getElementById('userAvatar').style.backgroundSize = 'cover';
+                    document.getElementById('userAvatar').textContent = '';
+                }
+                document.getElementById('profileName').value = currentUser.name;
+                if (currentUser.avatar) {
+                    document.getElementById('profilePreview').style.backgroundImage = `url(${currentUser.avatar})`;
+                }
+            }
+        }
+
+        // Load content
+        function loadContent() {
+            // Load sermons
+            const sermonsGrid = document.getElementById('sermonsGrid');
+            sermonsGrid.innerHTML = sermons.map(sermon => `
+                <div class="sermon-card">
+                    <div class="sermon-image" style="background-image: url('${sermon.image}')">
+                        <div class="sermon-overlay">
+                            <span class="sermon-category">Weekly Sermon</span>
+                        </div>
+                    </div>
+                    <div class="sermon-content">
+                        <div class="sermon-title">${sermon.title}</div>
+                        <div class="sermon-meta">
+                            <span>${sermon.speaker}</span>
+                            <span>${sermon.date}</span>
+                        </div>
+                        <button class="play-btn" onclick="playSermon(${sermon.id})">Watch Now</button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Load projects
+            const projectsGrid = document.getElementById('projectsGrid');
+            projectsGrid.innerHTML = projects.map(project => `
+                <div class="project-card" onclick="showProjectDetails(${project.id})">
+                    <div class="project-image" style="background-image: url('${project.image}')"></div>
+                    <div class="project-info">
+                        <h3>${project.title}</h3>
+                        <p>${project.description}</p>
+                    </div>
+                </div>
+            `).join('');
         }
 
         // Navigation
@@ -1059,114 +1395,300 @@
             });
             event.target.closest('.nav-item').classList.add('active');
             
-            // Hide all ministry pages and show main content
-            document.querySelectorAll('.ministry-page').forEach(page => {
-                page.classList.remove('active');
+            // Hide all pages
+            document.getElementById('mainContent').style.display = 'none';
+            document.querySelectorAll('.ministry-page').forEach(p => {
+                p.classList.remove('active');
             });
-            document.getElementById('mainContent').style.display = 'block';
             
-            // Scroll to appropriate section
-            if (page === 'sermons') {
-                document.querySelector('#mainContent .sermons-grid').scrollIntoView({ behavior: 'smooth' });
+            // Show selected page
+            if (page === 'home') {
+                document.getElementById('mainContent').style.display = 'block';
             } else if (page === 'ministries') {
-                document.querySelector('#mainContent .ministry-buttons').scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('ministriesPage').classList.add('active');
+            } else if (page === 'sermons') {
+                document.getElementById('sermonsPage').classList.add('active');
+                loadAllSermons();
             } else if (page === 'projects') {
-                document.querySelector('#mainContent .projects-grid').scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('projectsPage').classList.add('active');
+                loadAllProjects();
             } else if (page === 'events') {
-                alert('Events page coming soon!');
+                document.getElementById('eventsPage').classList.add('active');
+                loadEvents();
             }
         }
 
-        // Show ministry page
-        function showMinistry(ministry) {
-            document.getElementById('mainContent').style.display = 'none';
-            document.querySelectorAll('.ministry-page').forEach(page => {
-                page.classList.remove('active');
-            });
-            document.getElementById(`${ministry}-page`).classList.add('active');
-        }
-
-        // Show new here page
-        function showNewHere() {
-            document.getElementById('mainContent').style.display = 'none';
-            document.querySelectorAll('.ministry-page').forEach(page => {
-                page.classList.remove('active');
-            });
-            document.getElementById('newhere-page').classList.add('active');
-        }
-
-        // Go back to home
-        function goBack() {
-            document.querySelectorAll('.ministry-page').forEach(page => {
-                page.classList.remove('active');
+        function goToHome() {
+            document.querySelectorAll('.ministry-page').forEach(p => {
+                p.classList.remove('active');
             });
             document.getElementById('mainContent').style.display = 'block';
-        }
-
-        // Project functions
-        function showProject(project) {
-            const modal = document.getElementById('projectModal');
-            const title = document.getElementById('projectTitle');
-            const media = document.getElementById('projectMedia');
             
-            if (project === 'childrens-ministry') {
-                title.textContent = 'Children\'s Ministry Renovation';
-                document.getElementById('projectDescription').textContent = 'We completely renovated our children\'s wing to create a safe, engaging environment for our kids.';
-                media.innerHTML = `
-                    <div class="media-item"><img src="https://via.placeholder.com/300x200" alt="Project photo"></div>
-                    <div class="media-item"><img src="https://via.placeholder.com/300x200" alt="Project photo"></div>
-                    <div class="media-item"><video src="#" poster="https://via.placeholder.com/300x200"></video></div>
-                `;
-            } else if (project === 'food-pantry') {
-                title.textContent = 'Community Food Pantry';
-                document.getElementById('projectDescription').textContent = 'Serving over 50 families weekly with groceries and support.';
-                media.innerHTML = `
-                    <div class="media-item"><img src="https://via.placeholder.com/300x200" alt="Food pantry"></div>
-                    <div class="media-item"><img src="https://via.placeholder.com/300x200" alt="Volunteers"></div>
-                    <div class="media-item"><video src="#" poster="https://via.placeholder.com/300x200"></video></div>
-                `;
-            } else if (project === 'mission-trip') {
-                title.textContent = 'Mexico Mission Trip';
-                document.getElementById('projectDescription').textContent = 'Built homes and shared the gospel with 20 families in Mexico.';
-                media.innerHTML = `
-                    <div class="media-item"><img src="https://via.placeholder.com/300x200" alt="Mission trip"></div>
-                    <div class="media-item"><img src="https://via.placeholder.com/300x200" alt="Building homes"></div>
-                    <div class="media-item"><video src="#" poster="https://via.placeholder.com/300x200"></video></div>
-                `;
-            }
-            
-            modal.classList.add('active');
+            // Update nav
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.querySelector('span').textContent === 'Home') {
+                    item.classList.add('active');
+                }
+            });
         }
 
-        function closeProjectModal() {
-            document.getElementById('projectModal').classList.remove('active');
+        function goToMinistries() {
+            document.querySelectorAll('.ministry-page').forEach(p => {
+                p.classList.remove('active');
+            });
+            document.getElementById('ministriesPage').classList.add('active');
         }
 
-        // Material functions
-        function playVideo(title) {
-            alert(`Playing video: ${title}`);
+        // Show ministry details
+        function showMinistryDetails(ministry) {
+            document.getElementById('ministriesPage').classList.remove('active');
+            document.getElementById(`${ministry}-details`).classList.add('active');
         }
 
-        function playAudio(title) {
-            alert(`Playing audio: ${title}`);
+        // Load all sermons
+        function loadAllSermons() {
+            const grid = document.getElementById('allSermonsGrid');
+            grid.innerHTML = sermons.map(sermon => `
+                <div class="sermon-card">
+                    <div class="sermon-image" style="background-image: url('${sermon.image}')">
+                        <div class="sermon-overlay">
+                            <span class="sermon-category">Weekly Sermon</span>
+                        </div>
+                    </div>
+                    <div class="sermon-content">
+                        <div class="sermon-title">${sermon.title}</div>
+                        <div class="sermon-meta">
+                            <span>${sermon.speaker}</span>
+                            <span>${sermon.date}</span>
+                        </div>
+                        <button class="play-btn" onclick="playSermon(${sermon.id})">Watch Now</button>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        function downloadPDF(title) {
-            alert(`Downloading: ${title}`);
+        // Load all projects
+        function loadAllProjects() {
+            const grid = document.getElementById('allProjectsGrid');
+            grid.innerHTML = projects.map(project => `
+                <div class="project-card" onclick="showProjectDetails(${project.id})">
+                    <div class="project-image" style="background-image: url('${project.image}')"></div>
+                    <div class="project-info">
+                        <h3>${project.title}</h3>
+                        <p>${project.description}</p>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        function submitNewHere() {
-            const name = document.getElementById('newName').value;
-            const email = document.getElementById('newEmail').value;
-            
-            if (name && email) {
-                alert(`Thank you ${name}! Someone will contact you soon.`);
-                document.getElementById('newName').value = '';
-                document.getElementById('newEmail').value = '';
-                document.getElementById('newPhone').value = '';
+        // Load events
+        function loadEvents() {
+            const eventsList = document.getElementById('eventsList');
+            eventsList.innerHTML = `
+                <div class="sermon-card" style="margin-bottom: 1rem;">
+                    <div class="sermon-content">
+                        <h3>Easter Sunday Service</h3>
+                        <p>March 31, 2024 • 9:00 AM & 11:00 AM</p>
+                    </div>
+                </div>
+                <div class="sermon-card" style="margin-bottom: 1rem;">
+                    <div class="sermon-content">
+                        <h3>Men's Conference</h3>
+                        <p>April 15-16, 2024 • Register Now</p>
+                    </div>
+                </div>
+                <div class="sermon-card" style="margin-bottom: 1rem;">
+                    <div class="sermon-content">
+                        <h3>Women's Retreat</h3>
+                        <p>May 10-12, 2024 • Lakeview Camp</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Auth functions
+        function showSignup() {
+            document.getElementById('splashOverlay').style.display = 'none';
+            document.getElementById('signupModal').classList.add('active');
+        }
+
+        function showLogin() {
+            document.getElementById('splashOverlay').style.display = 'none';
+            document.getElementById('loginModal').classList.add('active');
+        }
+
+        function closeModals() {
+            document.getElementById('signupModal').classList.remove('active');
+            document.getElementById('loginModal').classList.remove('active');
+            document.getElementById('splashOverlay').style.display = 'flex';
+        }
+
+        function switchToLogin() {
+            document.getElementById('signupModal').classList.remove('active');
+            document.getElementById('loginModal').classList.add('active');
+        }
+
+        function switchToSignup() {
+            document.getElementById('loginModal').classList.remove('active');
+            document.getElementById('signupModal').classList.add('active');
+        }
+
+        function handleSignup() {
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const topic = document.getElementById('signupTopic').value;
+
+            if (name && email && password) {
+                currentUser = { name, email, topic };
+                localStorage.setItem('user', JSON.stringify(currentUser));
+                
+                document.getElementById('signupModal').classList.remove('active');
+                document.getElementById('appContainer').classList.add('active');
+                updateUserInterface();
+                loadContent();
+                
+                alert(`Welcome ${name}! We'll be praying about: ${topic || 'your request'}`);
             } else {
-                alert('Please fill in your name and email');
+                alert('Please fill in all required fields');
             }
+        }
+
+        function handleLogin() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (email && password) {
+                currentUser = { name: 'Friend', email };
+                localStorage.setItem('user', JSON.stringify(currentUser));
+                
+                document.getElementById('loginModal').classList.remove('active');
+                document.getElementById('appContainer').classList.add('active');
+                updateUserInterface();
+                loadContent();
+            } else {
+                alert('Please fill in all fields');
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('user');
+            currentUser = null;
+            document.getElementById('appContainer').classList.remove('active');
+            document.getElementById('splashOverlay').style.display = 'flex';
+        }
+
+        // Profile functions
+        function showProfileModal() {
+            document.getElementById('profileModal').classList.add('active');
+        }
+
+        function closeProfileModal() {
+            document.getElementById('profileModal').classList.remove('active');
+        }
+
+        function updateProfile() {
+            const name = document.getElementById('profileName').value;
+            const password = document.getElementById('profilePassword').value;
+            const confirmPassword = document.getElementById('profileConfirmPassword').value;
+
+            if (currentUser) {
+                currentUser.name = name;
+                
+                if (password && password === confirmPassword) {
+                    // Update password in real app
+                    alert('Password updated successfully');
+                }
+                
+                localStorage.setItem('user', JSON.stringify(currentUser));
+                updateUserInterface();
+                closeProfileModal();
+                alert('Profile updated successfully');
+            }
+        }
+
+        // Handle profile picture upload
+        document.getElementById('profilePicture').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profilePreview').style.backgroundImage = `url(${e.target.result})`;
+                    if (currentUser) {
+                        currentUser.avatar = e.target.result;
+                        localStorage.setItem('user', JSON.stringify(currentUser));
+                        updateUserInterface();
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Bible Study functions
+        function openBibleStudy() {
+            document.getElementById('chatContainer').classList.add('active');
+            loadBibleStudyMessages();
+        }
+
+        function closeChat() {
+            document.getElementById('chatContainer').classList.remove('active');
+        }
+
+        function loadBibleStudyMessages() {
+            const messagesDiv = document.getElementById('chatMessages');
+            messagesDiv.innerHTML = bibleStudyMessages.map(msg => `
+                <div class="message ${msg.sent ? 'sent' : 'received'}">
+                    <div class="message-content">${msg.text}</div>
+                </div>
+            `).join('');
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            
+            if (text) {
+                bibleStudyMessages.push({
+                    text: text,
+                    sent: true,
+                    time: new Date()
+                });
+                
+                loadBibleStudyMessages();
+                input.value = '';
+            }
+        }
+
+        function inviteToStudy() {
+            const email = prompt('Enter email address to invite:');
+            if (email) {
+                alert(`Invitation sent to ${email}`);
+                // In real app, send invitation email
+            }
+        }
+
+        // Media functions
+        function playSermon(id) {
+            const sermon = sermons.find(s => s.id === id);
+            alert(`Playing: ${sermon.title}\nTranscript available in admin panel`);
+        }
+
+        function playVideo(videoId) {
+            alert(`Playing video: ${videoId}`);
+        }
+
+        function playAudio(audioId) {
+            alert(`Playing audio: ${audioId}`);
+        }
+
+        function downloadPDF(pdfId) {
+            alert(`Downloading: ${pdfId}`);
+        }
+
+        function showProjectDetails(id) {
+            const project = projects.find(p => p.id === id);
+            alert(`Viewing project: ${project.title}\nMedia files: ${project.media.length} items`);
         }
     </script>
 </body>
