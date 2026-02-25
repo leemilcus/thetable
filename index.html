@@ -3,213 +3,790 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Table - Christian Community</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>The Table - Christian Church App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #ffffff;
+            border-bottom: 2px solid #ffffff;
+        }
+
+        .nav-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 4rem;
+            padding: 2rem;
+            border: 1px solid #000000;
+            background-color: #ffffff;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            border-bottom: 3px solid #000000;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Cards */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .card {
+            border: 1px solid #000000;
+            padding: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .card .date {
+            font-size: 0.9rem;
+            color: #333333;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #000000;
+            color: #ffffff;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border: 2px solid #000000;
+            transition: all 0.3s;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .btn-white {
+            background-color: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
+        }
+
+        .btn-white:hover {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        /* Grid Layout */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        /* Ministry Sections */
+        .ministry-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 0.8rem 2rem;
+            background-color: #ffffff;
+            border: 2px solid #000000;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        .ministry-content {
+            display: none;
+        }
+
+        .ministry-content.active {
+            display: block;
+        }
+
+        /* New Convert Form */
+        .convert-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #000000;
+            font-size: 1rem;
+            background-color: #ffffff;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-item {
+            border: 1px solid #000000;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .project-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Events List */
+        .event-item {
+            display: flex;
+            gap: 2rem;
+            padding: 1.5rem;
+            border: 1px solid #000000;
+            margin-bottom: 1rem;
+        }
+
+        .event-date {
+            min-width: 100px;
+            text-align: center;
+            background-color: #000000;
+            color: #ffffff;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .event-date .day {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .event-details {
+            flex: 1;
+        }
+
+        /* Vision/Mission Section */
+        .vision-mission {
+            background-color: #f5f5f5;
+            padding: 3rem;
+            text-align: center;
+            border: 1px solid #000000;
+        }
+
+        .vision-mission-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .vm-item {
+            padding: 1.5rem;
+        }
+
+        .vm-item h3 {
+            border-bottom: 2px solid #000000;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #ffffff;
+            text-decoration: none;
+            opacity: 0.8;
+        }
+
+        .footer-section a:hover {
+            opacity: 1;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #333333;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #000000;
+                padding: 1rem;
+            }
+
+            nav.active {
+                display: block;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .vision-mission-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .event-item {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .event-date {
+                max-width: 100px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <h1>THE TABLE</h1>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#sermons">Sermons</a></li>
-                <li><a href="#ministries">Ministries</a></li>
-                <li><a href="#events">Events</a></li>
-                <li><a href="#new-converts">New Here?</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
+    <header>
+        <div class="header-content">
+            <div class="logo"><span>THE TABLE</span></div>
+            <div class="nav-toggle" onclick="toggleMenu()">☰</div>
+            <nav id="nav-menu">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#sermons">Sermons</a></li>
+                    <li><a href="#ministries">Ministries</a></li>
+                    <li><a href="#new-convert">New Here</a></li>
+                    <li><a href="#events">Events</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
         </div>
-    </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Welcome to The Table</h1>
-            <p>Where everyone has a seat and no one eats alone</p>
-            <a href="#new-converts" class="btn btn-primary">Join Us</a>
-        </div>
-    </section>
-
-    <!-- Vision/Mission/Values Section -->
-    <section class="vmv-section">
-        <div class="container">
-            <div class="vmv-grid">
-                <div class="vmv-card">
-                    <i class="fas fa-eye"></i>
-                    <h3>Our Vision</h3>
-                    <p>To create a community where every person encounters Christ, grows in faith, and discovers their purpose at His table.</p>
+    <main>
+        <!-- Sermons Section -->
+        <section id="sermons">
+            <h2>Weekly Sermons</h2>
+            <div class="card-container">
+                <div class="card">
+                    <h3>The Power of Unity</h3>
+                    <div class="date">March 10, 2024</div>
+                    <p>Pastor John explores the importance of unity in the body of Christ.</p>
+                    <audio controls style="width: 100%; margin-top: 1rem;">
+                        <source src="#" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
                 </div>
-                <div class="vmv-card">
-                    <i class="fas fa-bullseye"></i>
-                    <h3>Our Mission</h3>
-                    <p>To make disciples, build families, transform communities, and extend God's kingdom through love and service.</p>
+                <div class="card">
+                    <h3>Walking in Faith</h3>
+                    <div class="date">March 3, 2024</div>
+                    <p>Understanding how to trust God in difficult times.</p>
+                    <audio controls style="width: 100%; margin-top: 1rem;">
+                        <source src="#" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
                 </div>
-                <div class="vmv-card">
-                    <i class="fas fa-heart"></i>
-                    <h3>Our Values</h3>
-                    <p>Faith, Family, Fellowship, Service, Excellence, Integrity, and Love for God and people.</p>
+                <div class="card">
+                    <h3>The Armor of God</h3>
+                    <div class="date">February 25, 2024</div>
+                    <p>Spiritual warfare and standing firm in Christ.</p>
+                    <audio controls style="width: 100%; margin-top: 1rem;">
+                        <source src="#" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Sermons Section -->
-    <section id="sermons" class="sermons-section">
-        <div class="container">
-            <h2 class="section-title">Recent Sermons</h2>
-            <div class="sermons-grid" id="sermons-container">
-                <!-- Sermons will be loaded here dynamically -->
+        <!-- Ministries Section -->
+        <section id="ministries">
+            <h2>Ministries</h2>
+            <div class="ministry-tabs">
+                <div class="tab active" onclick="switchMinistry('sunday-school')">Sunday School</div>
+                <div class="tab" onclick="switchMinistry('youth')">Youth</div>
+                <div class="tab" onclick="switchMinistry('couples')">Couples</div>
             </div>
-        </div>
-    </section>
 
-    <!-- Ministries Section -->
-    <section id="ministries" class="ministries-section">
-        <div class="container">
-            <h2 class="section-title">Our Ministries</h2>
-            <div class="ministries-grid">
-                <div class="ministry-card">
-                    <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Sunday School">
-                    <div class="ministry-content">
-                        <h3>Sunday School</h3>
-                        <p>Building faith foundations in our children through interactive Bible lessons, worship, and fun activities.</p>
-                        <button class="btn-ministry" onclick="showMinistryDetails('sunday-school')">Learn More</button>
+            <!-- Sunday School Content -->
+            <div id="sunday-school" class="ministry-content active">
+                <h3>Sunday School</h3>
+                <div class="card-container">
+                    <div class="card">
+                        <h3>Lesson: The Creation Story</h3>
+                        <div class="date">Ages 4-7</div>
+                        <p>Teaching materials and activities for this week's lesson.</p>
+                        <a href="#" class="btn btn-white">Download Materials</a>
                     </div>
-                </div>
-                <div class="ministry-card">
-                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Youth">
-                    <div class="ministry-content">
-                        <h3>Youth</h3>
-                        <p>Empowering the next generation to live boldly for Christ through dynamic worship and relevant teaching.</p>
-                        <button class="btn-ministry" onclick="showMinistryDetails('youth')">Learn More</button>
-                    </div>
-                </div>
-                <div class="ministry-card">
-                    <img src="https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Couples">
-                    <div class="ministry-content">
-                        <h3>Couples</h3>
-                        <p>Strengthening marriages and relationships through biblical principles and community support.</p>
-                        <button class="btn-ministry" onclick="showMinistryDetails('couples')">Learn More</button>
+                    <div class="card">
+                        <h3>Memory Verse: Psalm 23</h3>
+                        <div class="date">Ages 8-12</div>
+                        <p>Interactive games and activities for memorizing scripture.</p>
+                        <a href="#" class="btn btn-white">View Activities</a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Recent Projects Section -->
-    <section class="projects-section">
-        <div class="container">
-            <h2 class="section-title">Recent Projects</h2>
-            <div class="projects-grid" id="projects-container">
-                <!-- Projects will be loaded here dynamically -->
+            <!-- Youth Content -->
+            <div id="youth" class="ministry-content">
+                <h3>Youth Ministry</h3>
+                <div class="card-container">
+                    <div class="card">
+                        <h3>Wednesday Night Bible Study</h3>
+                        <div class="date">7:00 PM - Youth Center</div>
+                        <p>Current series: "Identity in Christ"</p>
+                        <a href="#" class="btn btn-white">Join Group</a>
+                    </div>
+                    <div class="card">
+                        <h3>Youth Worship Night</h3>
+                        <div class="date">March 15, 2024</div>
+                        <p>Special evening of worship and fellowship.</p>
+                        <a href="#" class="btn btn-white">RSVP</a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Events Section -->
-    <section id="events" class="events-section">
-        <div class="container">
-            <h2 class="section-title">Upcoming Events</h2>
-            <div class="events-list" id="events-container">
-                <!-- Events will be loaded here dynamically -->
+            <!-- Couples Content -->
+            <div id="couples" class="ministry-content">
+                <h3>Couples Ministry</h3>
+                <div class="card-container">
+                    <div class="card">
+                        <h3>Marriage Enrichment Series</h3>
+                        <div class="date">Sundays at 4:00 PM</div>
+                        <p>Building stronger marriages through God's word.</p>
+                        <a href="#" class="btn btn-white">Register</a>
+                    </div>
+                    <div class="card">
+                        <h3>Date Night</h3>
+                        <div class="date">March 22, 2024</div>
+                        <p>Monthly couples fellowship and dinner.</p>
+                        <a href="#" class="btn btn-white">Sign Up</a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- New Converts Section -->
-    <section id="new-converts" class="new-converts-section">
-        <div class="container">
-            <div class="new-converts-content">
-                <h2>New to The Table?</h2>
-                <p>We're so glad you're here! Whether you're exploring faith or ready to commit to Christ, we'd love to connect with you.</p>
-                <form id="new-convert-form" class="convert-form">
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Email Address" required>
-                    <input type="tel" placeholder="Phone Number">
-                    <select required>
-                        <option value="" disabled selected>I would like to...</option>
-                        <option value="visit">Visit The Table</option>
-                        <option value="salvation">Give my life to Christ</option>
-                        <option value="baptism">Get baptized</option>
-                        <option value="membership">Become a member</option>
-                        <option value="prayer">Request prayer</option>
-                    </select>
-                    <textarea placeholder="Tell us more about your journey or questions"></textarea>
-                    <button type="submit" class="btn btn-primary">Connect With Us</button>
-                </form>
+        <!-- New Converts Section -->
+        <section id="new-convert">
+            <h2>New Here?</h2>
+            <div class="grid-2">
+                <div>
+                    <h3>Welcome to The Table!</h3>
+                    <p>We're so excited that you're interested in becoming part of our church family. Whether you're a new believer or just checking out faith, we'd love to connect with you.</p>
+                    <p>Fill out this form and someone from our welcome team will reach out to you within 24 hours.</p>
+                    
+                    <div class="convert-form">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" placeholder="Enter your phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="interest">I'm interested in</label>
+                            <select id="interest">
+                                <option>Learning about faith</option>
+                                <option>Becoming a member</option>
+                                <option>Getting baptized</option>
+                                <option>Joining a small group</option>
+                            </select>
+                        </div>
+                        <button class="btn" onclick="submitConvert()">Connect With Us</button>
+                    </div>
+                </div>
+                <div>
+                    <h3>Next Steps</h3>
+                    <div class="card" style="margin-bottom: 1rem;">
+                        <h4>1. Welcome Lunch</h4>
+                        <p>Join us for lunch after service to meet our pastors and learn more about the church.</p>
+                    </div>
+                    <div class="card" style="margin-bottom: 1rem;">
+                        <h4>2. Discover The Table</h4>
+                        <p>A 4-week class exploring our beliefs, vision, and how to get connected.</p>
+                    </div>
+                    <div class="card">
+                        <h4>3. Baptism Class</h4>
+                        <p>Learn about baptism and take your next step of faith.</p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Feedback Section -->
-    <section id="contact" class="feedback-section">
-        <div class="container">
-            <h2 class="section-title">We'd Love to Hear From You</h2>
-            <div class="feedback-container">
-                <form id="feedback-form" class="feedback-form">
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <input type="text" placeholder="Subject">
-                    <textarea placeholder="Your message, feedback, or prayer request..." rows="5" required></textarea>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
-                </form>
-                <div class="contact-info">
+        <!-- Vision, Mission, Values Section -->
+        <section>
+            <h2>Our Foundation</h2>
+            <div class="vision-mission">
+                <div class="vision-mission-grid">
+                    <div class="vm-item">
+                        <h3>Our Vision</h3>
+                        <p>To be a community where everyone finds their place at God's table, experiences His love, and discovers their purpose in Christ.</p>
+                    </div>
+                    <div class="vm-item">
+                        <h3>Our Mission</h3>
+                        <p>Leading people to become fully devoted followers of Christ through worship, community, and service.</p>
+                    </div>
+                    <div class="vm-item">
+                        <h3>Our Values</h3>
+                        <p>• Biblical Truth<br>• Authentic Community<br>• Compassionate Service<br>• Generous Living<br>• Intentional Discipleship</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Projects -->
+        <section>
+            <h2>Recent Projects</h2>
+            <div class="projects-grid">
+                <div class="project-item">
+                    <div class="project-icon">🏫</div>
+                    <h3>Children's Wing Renovation</h3>
+                    <p>Completed February 2024</p>
+                    <p>New classrooms and safe learning environment for our kids.</p>
+                </div>
+                <div class="project-item">
+                    <div class="project-icon">🚐</div>
+                    <h3>Community Food Pantry</h3>
+                    <p>Ongoing</p>
+                    <p>Serving 50+ families weekly with groceries and support.</p>
+                </div>
+                <div class="project-item">
+                    <div class="project-icon">🌍</div>
+                    <h3>Mission Trip - Mexico</h3>
+                    <p>January 2024</p>
+                    <p>Built homes and shared the gospel with 20 families.</p>
+                </div>
+                <div class="project-item">
+                    <div class="project-icon">🎵</div>
+                    <h3>Worship Album Recording</h3>
+                    <p>Coming Spring 2024</p>
+                    <p>Original songs written by our worship team.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Upcoming Events -->
+        <section id="events">
+            <h2>Major Upcoming Events</h2>
+            <div class="event-item">
+                <div class="event-date">
+                    <span class="day">25</span>
+                    <span>MAR</span>
+                </div>
+                <div class="event-details">
+                    <h3>Easter Sunday Celebration</h3>
+                    <p>Join us for a powerful morning celebrating the resurrection of Jesus! Services at 9:00 AM and 11:00 AM. Followed by an Easter egg hunt and fellowship lunch.</p>
+                </div>
+            </div>
+            <div class="event-item">
+                <div class="event-date">
+                    <span class="day">15</span>
+                    <span>APR</span>
+                </div>
+                <div class="event-details">
+                    <h3>Men's Conference</h3>
+                    <p>A weekend of fellowship, teaching, and worship designed to equip men to lead in their homes and communities.</p>
+                </div>
+            </div>
+            <div class="event-item">
+                <div class="event-date">
+                    <span class="day">10</span>
+                    <span>MAY</span>
+                </div>
+                <div class="event-details">
+                    <h3>Women's Retreat</h3>
+                    <p>Two days of refreshing, connection, and spiritual growth at beautiful Lakeview Camp.</p>
+                </div>
+            </div>
+            <div class="event-item">
+                <div class="event-date">
+                    <span class="day">22</span>
+                    <span>JUN</span>
+                </div>
+                <div class="event-details">
+                    <h3>Summer Youth Camp</h3>
+                    <p>A week-long adventure for teens filled with worship, fun activities, and deepening faith.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact/Feedback Section -->
+        <section id="contact">
+            <h2>Contact & Feedback</h2>
+            <div class="grid-2">
+                <div>
+                    <h3>Send Us a Message</h3>
+                    <div class="form-group">
+                        <label for="contact-name">Name</label>
+                        <input type="text" id="contact-name" placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-email">Email</label>
+                        <input type="email" id="contact-email" placeholder="Your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-message">Message/Feedback</label>
+                        <textarea id="contact-message" placeholder="How can we pray for you or help you?"></textarea>
+                    </div>
+                    <button class="btn" onclick="submitContact()">Send Message</button>
+                </div>
+                <div>
                     <h3>Contact Information</h3>
-                    <p><i class="fas fa-phone"></i> +27 123 456 789</p>
-                    <p><i class="fas fa-envelope"></i> info@thetable.org</p>
-                    <p><i class="fas fa-map-marker-alt"></i> 123 Church Street, Johannesburg, South Africa</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <div class="card" style="margin-bottom: 1rem;">
+                        <h4>📍 Address</h4>
+                        <p>123 Faith Avenue<br>Grace City, ST 12345</p>
+                    </div>
+                    <div class="card" style="margin-bottom: 1rem;">
+                        <h4>📞 Phone</h4>
+                        <p>(555) 123-4567</p>
+                    </div>
+                    <div class="card" style="margin-bottom: 1rem;">
+                        <h4>✉️ Email</h4>
+                        <p>info@thetable.church</p>
+                    </div>
+                    <div class="card">
+                        <h4>⏰ Office Hours</h4>
+                        <p>Tuesday - Friday: 9AM - 5PM<br>Saturday: 10AM - 2PM<br>Sunday: 8AM - 1PM</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>The Table</h3>
-                    <p>A place for everyone at God's table</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#sermons">Sermons</a></li>
-                        <li><a href="#ministries">Ministries</a></li>
-                        <li><a href="#events">Events</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Service Times</h4>
-                    <p>Sunday: 9:00 AM & 11:00 AM</p>
-                    <p>Wednesday: 7:00 PM</p>
-                    <p>Saturday: 5:00 PM</p>
-                </div>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>The Table</h3>
+                <p>A place for everyone at God's table.</p>
+                <p>© 2024 The Table Church. All rights reserved.</p>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 The Table. All rights reserved.</p>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#sermons">Sermons</a></li>
+                    <li><a href="#ministries">Ministries</a></li>
+                    <li><a href="#new-convert">New Here</a></li>
+                    <li><a href="#events">Events</a></li>
+                </ul>
             </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">YouTube</a></li>
+                    <li><a href="#">Podcast</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>Built on the foundation of Jesus Christ</p>
         </div>
     </footer>
 
-    <!-- Admin Panel (Simple - accessible via /admin) -->
-    <script src="script.js"></script>
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const nav = document.getElementById('nav-menu');
+            nav.classList.toggle('active');
+        }
+
+        // Ministry tab switching
+        function switchMinistry(ministry) {
+            // Hide all ministry content
+            document.querySelectorAll('.ministry-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected ministry content
+            document.getElementById(ministry).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Form submissions (these would connect to a backend in a real app)
+        function submitConvert() {
+            alert('Thank you for reaching out! Someone from our welcome team will contact you soon.');
+            document.querySelector('#new-convert input[type="text"]').value = '';
+            document.querySelector('#new-convert input[type="email"]').value = '';
+            document.querySelector('#new-convert input[type="tel"]').value = '';
+        }
+
+        function submitContact() {
+            alert('Thank you for your message! We\'ll get back to you soon.');
+            document.getElementById('contact-name').value = '';
+            document.getElementById('contact-email').value = '';
+            document.getElementById('contact-message').value = '';
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#home') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    document.querySelector(targetId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+                
+                // Close mobile menu after clicking
+                document.getElementById('nav-menu').classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
