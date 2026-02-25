@@ -84,9 +84,10 @@
             box-shadow: var(--shadow-md);
         }
 
-        .splash-logo img {
+        .splash-logo svg {
             width: 50px;
             height: 50px;
+            fill: white;
         }
 
         .splash-content h2 {
@@ -182,6 +183,19 @@
             outline: none;
         }
 
+        .auth-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .auth-checkbox input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
         .auth-btn {
             width: 100%;
             padding: 1rem;
@@ -259,10 +273,10 @@
             align-items: center;
         }
 
-        .app-logo-icon img {
+        .app-logo-icon svg {
             width: 22px;
             height: 22px;
-            filter: brightness(0) invert(1);
+            fill: white;
         }
 
         .app-logo-text {
@@ -356,6 +370,16 @@
             cursor: pointer;
             flex: 1;
             min-width: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .primary-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: white;
         }
 
         .secondary-btn {
@@ -369,6 +393,133 @@
             cursor: pointer;
             flex: 1;
             min-width: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .secondary-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: white;
+        }
+
+        /* Notice Board */
+        .notice-board {
+            background: var(--gradient-teal);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--pure-white);
+            width: 100%;
+        }
+
+        .notice-board h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .notice-board h3 svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        .notice-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .notice-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .notice-item p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .notice-date {
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            opacity: 0.7;
+        }
+
+        /* New Here Section */
+        .new-here-section {
+            background: var(--gradient-gold);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-black);
+            width: 100%;
+        }
+
+        .new-here-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .new-here-section h3 svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--primary-black);
+        }
+
+        .new-here-section p {
+            margin-bottom: 1.2rem;
+            opacity: 0.95;
+            font-size: 0.95rem;
+        }
+
+        .checkbox-group {
+            margin: 1rem 0;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .connect-btn {
+            background: var(--primary-black);
+            color: var(--pure-white);
+            border: none;
+            padding: 1rem;
+            border-radius: 12px;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .connect-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: white;
         }
 
         /* Pastor's Video */
@@ -407,6 +558,15 @@
             font-weight: 600;
             position: relative;
             padding-left: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--accent-gold);
         }
 
         .section-title::before {
@@ -418,47 +578,6 @@
             width: 4px;
             background: var(--gradient-gold);
             border-radius: 2px;
-        }
-
-        /* New Here Section */
-        .new-here-section {
-            background: var(--gradient-teal);
-            border-radius: 20px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--pure-white);
-            width: 100%;
-        }
-
-        .new-here-section h3 {
-            font-size: 1.4rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .new-here-section p {
-            margin-bottom: 1.2rem;
-            opacity: 0.95;
-            font-size: 0.95rem;
-        }
-
-        .topic-input {
-            width: 100%;
-            padding: 1rem;
-            border: none;
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-        }
-
-        .connect-btn {
-            background: var(--primary-black);
-            color: var(--pure-white);
-            border: none;
-            padding: 1rem;
-            border-radius: 12px;
-            font-weight: 600;
-            width: 100%;
-            cursor: pointer;
         }
 
         /* Sermons Grid */
@@ -536,6 +655,16 @@
             width: 100%;
             font-weight: 500;
             font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .play-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: white;
         }
 
         /* Projects Grid */
@@ -578,6 +707,58 @@
             font-size: 0.9rem;
         }
 
+        /* Events Section */
+        .events-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+
+        .event-card {
+            background: var(--pure-white);
+            border-radius: 16px;
+            padding: 1.2rem;
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--accent-gold);
+        }
+
+        .event-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-black);
+        }
+
+        .event-details {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        .event-register {
+            background: var(--primary-black);
+            color: var(--pure-white);
+            border: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .event-register svg {
+            width: 16px;
+            height: 16px;
+            fill: white;
+        }
+
         /* Ministry Page */
         .ministry-page {
             display: none;
@@ -601,6 +782,15 @@
             font-size: 0.95rem;
             font-weight: 500;
             width: auto;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--primary-black);
         }
 
         /* Ministry Cards */
@@ -662,6 +852,15 @@
             font-size: 1.2rem;
             border-bottom: 3px solid var(--accent-gold);
             padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .material-category h3 svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--accent-gold);
         }
 
         .material-item {
@@ -675,6 +874,11 @@
             cursor: pointer;
             transition: all 0.2s;
             width: 100%;
+        }
+
+        .material-item:hover {
+            background: var(--soft-gray);
+            transform: translateX(5px);
         }
 
         .material-icon {
@@ -734,6 +938,15 @@
 
         .chat-header h3 {
             font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chat-header svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
         }
 
         .chat-messages {
@@ -802,6 +1015,15 @@
             font-weight: 600;
             font-size: 0.95rem;
             white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chat-send-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: white;
         }
 
         .invite-btn {
@@ -813,6 +1035,15 @@
             cursor: pointer;
             font-size: 0.85rem;
             margin-left: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .invite-btn svg {
+            width: 14px;
+            height: 14px;
+            fill: white;
         }
 
         /* Profile Modal */
@@ -899,9 +1130,10 @@
             color: var(--pure-white);
         }
 
-        .nav-item i {
-            font-size: 1.2rem;
-            font-style: normal;
+        .nav-item svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
         }
 
         /* Admin Link */
@@ -920,8 +1152,13 @@
             cursor: pointer;
             box-shadow: var(--shadow-md);
             z-index: 99;
-            font-size: 1.2rem;
             text-decoration: none;
+        }
+
+        .admin-link svg {
+            width: 22px;
+            height: 22px;
+            fill: white;
         }
 
         /* Project Modal */
@@ -974,6 +1211,92 @@
             object-fit: cover;
         }
 
+        /* Video Player Modal */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 2400;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        .video-player {
+            width: 90%;
+            max-width: 500px;
+            background: var(--primary-black);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .video-player video {
+            width: 100%;
+            max-height: 300px;
+            background: black;
+        }
+
+        .video-info {
+            padding: 1rem;
+            color: var(--pure-white);
+        }
+
+        .video-info h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .video-controls {
+            display: flex;
+            gap: 0.5rem;
+            padding: 1rem;
+        }
+
+        .video-controls button {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            background: var(--accent-gold);
+            color: var(--pure-white);
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Audio Player */
+        .audio-player {
+            background: var(--soft-gray);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+        }
+
+        .audio-player audio {
+            width: 100%;
+        }
+
+        /* PDF Viewer */
+        .pdf-viewer {
+            background: var(--soft-gray);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .pdf-viewer a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
         /* Animations */
         @keyframes fadeInUp {
             from {
@@ -1000,6 +1323,10 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             
+            .events-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
             .ministry-cards {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -1022,6 +1349,10 @@
                 grid-template-columns: repeat(3, 1fr);
             }
             
+            .events-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
             .ministry-cards {
                 grid-template-columns: repeat(4, 1fr);
             }
@@ -1037,7 +1368,9 @@
     <div class="splash-overlay" id="splashOverlay">
         <div class="splash-content">
             <div class="splash-logo">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/%3E%3C/svg%3E" alt="The Table">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
             </div>
             <h2>Welcome to The Table</h2>
             <p>Where everyone has a place at God's table</p>
@@ -1050,13 +1383,24 @@
 
     <!-- Signup Modal -->
     <div class="auth-modal" id="signupModal">
-        <span class="close-btn" onclick="closeModals()">&times;</span>
+        <span class="close-btn" onclick="closeModals()">×</span>
         <div class="auth-content">
             <h2>Join The Table</h2>
             <input type="text" class="auth-input" placeholder="Full Name" id="signupName">
             <input type="email" class="auth-input" placeholder="Email" id="signupEmail">
             <input type="password" class="auth-input" placeholder="Password" id="signupPassword">
-            <input type="text" class="auth-input" placeholder="What can we pray about?" id="signupTopic">
+            <input type="tel" class="auth-input" placeholder="Phone Number (optional)" id="signupPhone">
+            
+            <div class="auth-checkbox">
+                <input type="checkbox" id="contactMe">
+                <label for="contactMe">I would like to be contacted by the prayer team</label>
+            </div>
+            
+            <div class="auth-checkbox">
+                <input type="checkbox" id="meetPastor">
+                <label for="meetPastor">I would like to speak with a pastor</label>
+            </div>
+            
             <button class="auth-btn" onclick="handleSignup()">Create Account</button>
             <p style="text-align: center;">Already have an account? <a href="#" onclick="switchToLogin()">Sign In</a></p>
         </div>
@@ -1064,7 +1408,7 @@
 
     <!-- Login Modal -->
     <div class="auth-modal" id="loginModal">
-        <span class="close-btn" onclick="closeModals()">&times;</span>
+        <span class="close-btn" onclick="closeModals()">×</span>
         <div class="auth-content">
             <h2>Welcome Back</h2>
             <input type="email" class="auth-input" placeholder="Email" id="loginEmail">
@@ -1077,7 +1421,7 @@
     <!-- Profile Modal -->
     <div class="profile-modal" id="profileModal">
         <div class="profile-content">
-            <span class="close-btn" onclick="closeProfileModal()" style="color: var(--primary-black); position: relative; float: right; background: var(--soft-gray);">&times;</span>
+            <span class="close-btn" onclick="closeProfileModal()" style="color: var(--primary-black); position: relative; float: right; background: var(--soft-gray);">×</span>
             <h2 style="margin-bottom: 1.5rem;">Profile Settings</h2>
             
             <div class="profile-picture-upload">
@@ -1099,28 +1443,93 @@
     <!-- Bible Study Chat -->
     <div class="chat-container" id="chatContainer">
         <div class="chat-header">
-            <h3>Bible Study: The Table Fellowship</h3>
+            <h3>
+                <svg viewBox="0 0 24 24">
+                    <path d="M21 6h-2v2h-2V6h-2V4h2V2h2v2h2v2zm-10 3c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm0 4c-2.33 0-7 1.17-7 3.5V17h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                </svg>
+                Bible Study Fellowship
+            </h3>
             <div>
-                <button class="invite-btn" onclick="inviteToStudy()">Invite</button>
-                <button class="invite-btn" onclick="closeChat()">Close</button>
+                <button class="invite-btn" onclick="inviteToStudy()">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                    </svg>
+                    Invite
+                </button>
+                <button class="invite-btn" onclick="closeChat()">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                    Close
+                </button>
             </div>
         </div>
-        <div class="chat-messages" id="chatMessages">
-            <!-- Messages will appear here -->
-        </div>
+        <div class="chat-messages" id="chatMessages"></div>
         <div class="chat-input-area">
             <input type="text" class="chat-input" placeholder="Type a message..." id="chatInput">
-            <button class="chat-send-btn" onclick="sendMessage()">Send</button>
+            <button class="chat-send-btn" onclick="sendMessage()">
+                <svg viewBox="0 0 24 24">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                </svg>
+                Send
+            </button>
         </div>
     </div>
 
     <!-- Project Modal -->
     <div class="project-modal" id="projectModal">
         <div class="project-modal-content">
-            <span class="close-btn" onclick="closeProjectModal()" style="color: var(--primary-black); position: relative; float: right; background: var(--soft-gray);">&times;</span>
+            <span class="close-btn" onclick="closeProjectModal()" style="color: var(--primary-black); position: relative; float: right; background: var(--soft-gray);">×</span>
             <h2 id="projectTitle">Project Title</h2>
             <p id="projectDescription">Project description</p>
             <div class="media-gallery" id="projectMedia"></div>
+        </div>
+    </div>
+
+    <!-- Video Player Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-player">
+            <video id="videoPlayer" controls>
+                <source src="" type="video/mp4">
+            </video>
+            <div class="video-info">
+                <h3 id="videoTitle">Video Title</h3>
+                <p id="videoDescription">Video description</p>
+            </div>
+            <div class="video-controls">
+                <button onclick="closeVideoModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Player Modal -->
+    <div class="video-modal" id="audioModal">
+        <div class="video-player">
+            <div class="audio-player" id="audioPlayerContainer">
+                <audio id="audioPlayer" controls style="width: 100%;">
+                    <source src="" type="audio/mpeg">
+                </audio>
+            </div>
+            <div class="video-info">
+                <h3 id="audioTitle">Audio Title</h3>
+            </div>
+            <div class="video-controls">
+                <button onclick="closeAudioModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDF Viewer Modal -->
+    <div class="video-modal" id="pdfModal">
+        <div class="video-player">
+            <div class="pdf-viewer" id="pdfViewer">
+                <h3 id="pdfTitle">PDF Document</h3>
+                <p>Click below to download</p>
+                <a id="pdfLink" href="#" download>Download PDF</a>
+            </div>
+            <div class="video-controls">
+                <button onclick="closePdfModal()">Close</button>
+            </div>
         </div>
     </div>
 
@@ -1131,7 +1540,9 @@
             <div class="header-content">
                 <div class="app-logo">
                     <div class="app-logo-icon">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/%3E%3C/svg%3E" alt="The Table">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
                     </div>
                     <span class="app-logo-text">The Table</span>
                 </div>
@@ -1149,39 +1560,124 @@
                 <h1 id="welcomeMessage">Welcome back, <span id="userName">Friend</span>!</h1>
                 <p>We're glad you're here. Let's grow together in faith.</p>
                 <div class="action-buttons">
-                    <button class="primary-btn" onclick="openBibleStudy()">📖 Bible Study Chat</button>
-                    <button class="secondary-btn" onclick="scrollToNewHere()">🙏 New Here?</button>
+                    <button class="primary-btn" onclick="openBibleStudy()">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M21 6h-2v2h-2V6h-2V4h2V2h2v2h2v2zm-10 3c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm0 4c-2.33 0-7 1.17-7 3.5V17h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                        </svg>
+                        Bible Study Chat
+                    </button>
+                    <button class="secondary-btn" onclick="scrollToNewHere()">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                        </svg>
+                        New Here?
+                    </button>
+                </div>
+            </div>
+
+            <!-- Notice Board -->
+            <div class="notice-board">
+                <h3>
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-8 2h2v2h-2V6zm0 4h2v2h-2v-2zm-2 4H6v-2h4v2zm6 0h-4v-2h4v2zm0-4h-4v-2h4v2z"/>
+                    </svg>
+                    Notice Board
+                </h3>
+                <div class="notice-item">
+                    <h4>Wednesday Prayer Meeting</h4>
+                    <p>Join us every Wednesday at 7:00 PM for prayer and fellowship.</p>
+                    <div class="notice-date">Posted: March 15, 2024</div>
+                </div>
+                <div class="notice-item">
+                    <h4>New Bible Study Series</h4>
+                    <p>"The Book of Romans" starts this Sunday at 9:30 AM.</p>
+                    <div class="notice-date">Posted: March 14, 2024</div>
+                </div>
+                <div class="notice-item">
+                    <h4>Food Drive</h4>
+                    <p>Bring non-perishable items this Sunday for our community food pantry.</p>
+                    <div class="notice-date">Posted: March 13, 2024</div>
                 </div>
             </div>
 
             <!-- New Here Section -->
             <div class="new-here-section" id="newHereSection">
-                <h3>New to The Table?</h3>
-                <p>We'd love to connect with you! Let us know how we can pray for you or what topics you'd like help with.</p>
-                <input type="text" class="topic-input" placeholder="What can we pray about? (e.g., faith, marriage, healing)" id="newHereTopic">
-                <button class="connect-btn" onclick="connectNewHere()">Connect With Us</button>
+                <h3>
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0 2c-1.66 0-5 1.34-5 4v2h10v-2c0-2.66-3.34-4-5-4z"/>
+                    </svg>
+                    New to The Table?
+                </h3>
+                <p>We'd love to connect with you! Let us know how we can support you on your faith journey.</p>
+                
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="prayerTeam">
+                        <span>I would like to be contacted by the prayer team</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="meetPastorNew">
+                        <span>I would like to speak with a pastor</span>
+                    </label>
+                </div>
+                
+                <button class="connect-btn" onclick="connectNewHere()">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                    Connect With Us
+                </button>
             </div>
 
             <!-- Pastor's Video -->
             <div class="pastor-video">
-                <h2 class="section-title">A Word from Pastor</h2>
+                <h2 class="section-title">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                    </svg>
+                    A Word from Pastor
+                </h2>
                 <div class="video-container">
                     <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
 
+            <!-- Upcoming Events with Registration -->
+            <h2 class="section-title">
+                <svg viewBox="0 0 24 24">
+                    <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                </svg>
+                Upcoming Events
+            </h2>
+            <div class="events-grid" id="eventsGrid"></div>
+
             <!-- Recent Sermons -->
-            <h2 class="section-title">Recent Sermons</h2>
+            <h2 class="section-title">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                </svg>
+                Recent Sermons
+            </h2>
             <div class="sermons-grid" id="sermonsGrid"></div>
 
             <!-- Recent Projects -->
-            <h2 class="section-title">Recent Projects</h2>
+            <h2 class="section-title">
+                <svg viewBox="0 0 24 24">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 8h-4V7h-4v4H6V7h2v2h8V7h2v4z"/>
+                </svg>
+                Recent Projects
+            </h2>
             <div class="projects-grid" id="projectsGrid"></div>
         </div>
 
         <!-- Ministries Page -->
         <div class="ministry-page" id="ministriesPage">
-            <button class="back-btn" onclick="goToHome()">← Back</button>
+            <button class="back-btn" onclick="goToHome()">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                Back
+            </button>
             <h2 class="section-title">Our Ministries</h2>
             <div class="ministry-cards">
                 <div class="ministry-card" onclick="showMinistryDetails('sunday-school')">
@@ -1217,19 +1713,29 @@
 
         <!-- Ministry Details Pages -->
         <div class="ministry-page" id="sunday-school-details">
-            <button class="back-btn" onclick="goToMinistries()">← Back to Ministries</button>
+            <button class="back-btn" onclick="goToMinistries()">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                Back to Ministries
+            </button>
             <h2 class="section-title">Sunday School</h2>
             <div class="materials-grid">
                 <div class="material-category">
-                    <h3>Video Lessons</h3>
-                    <div class="material-item" onclick="playVideo('creation-story')">
+                    <h3>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                        </svg>
+                        Video Lessons
+                    </h3>
+                    <div class="material-item" onclick="playVideo('creation-story', 'The Creation Story', 'A fun lesson for ages 4-7')">
                         <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1485846234645-a62644f84728?w=100')"></div>
                         <div class="material-info">
                             <strong>The Creation Story</strong>
                             <small>Lesson 1 • 15 mins</small>
                         </div>
                     </div>
-                    <div class="material-item" onclick="playVideo('noahs-ark')">
+                    <div class="material-item" onclick="playVideo('noahs-ark', 'Noah\'s Ark', 'The story of Noah for children')">
                         <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=100')"></div>
                         <div class="material-info">
                             <strong>Noah's Ark</strong>
@@ -1238,8 +1744,13 @@
                     </div>
                 </div>
                 <div class="material-category">
-                    <h3>Audio Lessons</h3>
-                    <div class="material-item" onclick="playAudio('memory-verses')">
+                    <h3>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                        </svg>
+                        Audio Lessons
+                    </h3>
+                    <div class="material-item" onclick="playAudio('memory-verses', 'Memory Verses Song')">
                         <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=100')"></div>
                         <div class="material-info">
                             <strong>Memory Verses</strong>
@@ -1248,8 +1759,13 @@
                     </div>
                 </div>
                 <div class="material-category">
-                    <h3>Worksheets</h3>
-                    <div class="material-item" onclick="downloadPDF('lesson1-worksheet')">
+                    <h3>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2z"/>
+                        </svg>
+                        Worksheets
+                    </h3>
+                    <div class="material-item" onclick="downloadPDF('lesson1-worksheet', 'Lesson 1 Worksheet', 'Ages 4-7')">
                         <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1455390582262-044cdead277a?w=100')"></div>
                         <div class="material-info">
                             <strong>Lesson 1 Worksheet</strong>
@@ -1261,12 +1777,22 @@
         </div>
 
         <div class="ministry-page" id="youth-details">
-            <button class="back-btn" onclick="goToMinistries()">← Back to Ministries</button>
+            <button class="back-btn" onclick="goToMinistries()">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                Back to Ministries
+            </button>
             <h2 class="section-title">Youth Ministry</h2>
             <div class="materials-grid">
                 <div class="material-category">
-                    <h3>Video Series</h3>
-                    <div class="material-item" onclick="playVideo('identity-in-christ')">
+                    <h3>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                        </svg>
+                        Video Series
+                    </h3>
+                    <div class="material-item" onclick="playVideo('identity-in-christ', 'Identity in Christ', 'Week 1 of our youth series')">
                         <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=100')"></div>
                         <div class="material-info">
                             <strong>Identity in Christ</strong>
@@ -1275,8 +1801,13 @@
                     </div>
                 </div>
                 <div class="material-category">
-                    <h3>Worship</h3>
-                    <div class="material-item" onclick="playAudio('youth-worship')">
+                    <h3>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                        </svg>
+                        Worship
+                    </h3>
+                    <div class="material-item" onclick="playAudio('youth-worship', 'Youth Worship Night')">
                         <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=100')"></div>
                         <div class="material-info">
                             <strong>Youth Worship Night</strong>
@@ -1288,12 +1819,22 @@
         </div>
 
         <div class="ministry-page" id="couples-details">
-            <button class="back-btn" onclick="goToMinistries()">← Back to Ministries</button>
+            <button class="back-btn" onclick="goToMinistries()">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                Back to Ministries
+            </button>
             <h2 class="section-title">Couples Ministry</h2>
             <div class="materials-grid">
                 <div class="material-category">
-                    <h3>Marriage Videos</h3>
-                    <div class="material-item" onclick="playVideo('building-foundations')">
+                    <h3>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                        </svg>
+                        Marriage Videos
+                    </h3>
+                    <div class="material-item" onclick="playVideo('building-foundations', 'Building Strong Foundations', 'Session 1 of marriage series')">
                         <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=100')"></div>
                         <div class="material-info">
                             <strong>Building Strong Foundations</strong>
@@ -1302,8 +1843,13 @@
                     </div>
                 </div>
                 <div class="material-category">
-                    <h3>Resources</h3>
-                    <div class="material-item" onclick="downloadPDF('marriage-devotional')">
+                    <h3>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2z"/>
+                        </svg>
+                        Resources
+                    </h3>
+                    <div class="material-item" onclick="downloadPDF('marriage-devotional', '30-Day Marriage Devotional', 'Daily readings for couples')">
                         <div class="material-icon" style="background-image: url('https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?w=100')"></div>
                         <div class="material-info">
                             <strong>30-Day Devotional</strong>
@@ -1315,29 +1861,43 @@
         </div>
 
         <!-- Admin Link -->
-        <a href="admin.html" class="admin-link" target="_blank">👤</a>
+        <a href="admin.html" class="admin-link" target="_blank">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0 2c-1.66 0-5 1.34-5 4v2h10v-2c0-2.66-3.34-4-5-4z"/>
+            </svg>
+        </a>
 
         <!-- Bottom Navigation -->
         <nav class="bottom-nav">
             <div class="nav-items">
                 <div class="nav-item active" onclick="navigateTo('home')">
-                    <i>🏠</i>
+                    <svg viewBox="0 0 24 24">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
                     <span>Home</span>
                 </div>
                 <div class="nav-item" onclick="navigateTo('ministries')">
-                    <i>🙏</i>
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                    </svg>
                     <span>Ministries</span>
                 </div>
                 <div class="nav-item" onclick="navigateTo('sermons')">
-                    <i>📖</i>
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                    </svg>
                     <span>Sermons</span>
                 </div>
                 <div class="nav-item" onclick="navigateTo('projects')">
-                    <i>📸</i>
+                    <svg viewBox="0 0 24 24">
+                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 8h-4V7h-4v4H6V7h2v2h8V7h2v4z"/>
+                    </svg>
                     <span>Projects</span>
                 </div>
                 <div class="nav-item" onclick="navigateTo('events')">
-                    <i>📅</i>
+                    <svg viewBox="0 0 24 24">
+                        <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                    </svg>
                     <span>Events</span>
                 </div>
             </div>
@@ -1367,21 +1927,24 @@
                 title: "The Power of Unity",
                 date: "March 10, 2024",
                 speaker: "Pastor John",
-                image: "https://images.unsplash.com/photo-1476231791107-3ac0e77f5162?w=500"
+                image: "https://images.unsplash.com/photo-1476231791107-3ac0e77f5162?w=500",
+                videoUrl: "sermon1.mp4"
             },
             {
                 id: 2,
                 title: "Walking in Faith",
                 date: "March 3, 2024",
                 speaker: "Pastor Sarah",
-                image: "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=500"
+                image: "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=500",
+                videoUrl: "sermon2.mp4"
             },
             {
                 id: 3,
                 title: "The Armor of God",
                 date: "February 25, 2024",
                 speaker: "Pastor Mike",
-                image: "https://images.unsplash.com/photo-1449585310878-54e6e7c4e5ab?w=500"
+                image: "https://images.unsplash.com/photo-1449585310878-54e6e7c4e5ab?w=500",
+                videoUrl: "sermon3.mp4"
             }
         ];
 
@@ -1409,6 +1972,33 @@
             }
         ];
 
+        const events = [
+            {
+                id: 1,
+                title: "Easter Sunday Service",
+                date: "March 31, 2024",
+                time: "9:00 AM & 11:00 AM",
+                location: "Main Sanctuary",
+                description: "Join us for a special celebration of the resurrection"
+            },
+            {
+                id: 2,
+                title: "Men's Conference",
+                date: "April 15-16, 2024",
+                time: "Friday 7PM - Saturday 5PM",
+                location: "Fellowship Hall",
+                description: "A weekend of fellowship and teaching for men"
+            },
+            {
+                id: 3,
+                title: "Women's Retreat",
+                date: "May 10-12, 2024",
+                time: "All weekend",
+                location: "Lakeview Camp",
+                description: "Refresh and renew at our annual women's retreat"
+            }
+        ];
+
         // Initialize app
         window.onload = function() {
             const savedUser = localStorage.getItem('user');
@@ -1420,7 +2010,33 @@
                 loadContent();
             }
             loadBibleStudyMessages();
+            createMissingPages();
         };
+
+        // Create missing pages
+        function createMissingPages() {
+            const pages = ['sermonsPage', 'projectsPage', 'eventsPage'];
+            pages.forEach(pageId => {
+                if (!document.getElementById(pageId)) {
+                    const div = document.createElement('div');
+                    div.className = 'ministry-page';
+                    div.id = pageId;
+                    div.innerHTML = `
+                        <button class="back-btn" onclick="goToHome()">
+                            <svg viewBox="0 0 24 24" width="16" height="16">
+                                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                            </svg>
+                            Back
+                        </button>
+                        <h2 class="section-title">${pageId.replace('Page', '')}</h2>
+                        <div class="${pageId === 'sermonsPage' ? 'sermons-grid' : pageId === 'projectsPage' ? 'projects-grid' : 'events-grid'}" 
+                             id="${pageId === 'sermonsPage' ? 'allSermonsGrid' : pageId === 'projectsPage' ? 'allProjectsGrid' : 'allEventsGrid'}">
+                        </div>
+                    `;
+                    document.querySelector('.app-container').appendChild(div);
+                }
+            });
+        }
 
         // Update user interface
         function updateUserInterface() {
@@ -1456,7 +2072,12 @@
                             <span>${sermon.speaker}</span>
                             <span>${sermon.date}</span>
                         </div>
-                        <button class="play-btn" onclick="playSermon(${sermon.id})">Watch Now</button>
+                        <button class="play-btn" onclick="playSermon(${sermon.id})">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            Watch Now
+                        </button>
                     </div>
                 </div>
             `).join('');
@@ -1472,6 +2093,28 @@
                     </div>
                 </div>
             `).join('');
+
+            // Load events
+            const eventsGrid = document.getElementById('eventsGrid');
+            if (eventsGrid) {
+                eventsGrid.innerHTML = events.map(event => `
+                    <div class="event-card">
+                        <h3>${event.title}</h3>
+                        <div class="event-details">
+                            <span>${event.date}</span>
+                            <span>${event.time}</span>
+                        </div>
+                        <p>${event.description}</p>
+                        <p><small>📍 ${event.location}</small></p>
+                        <button class="event-register" onclick="registerForEvent(${event.id})">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                            </svg>
+                            Register Now
+                        </button>
+                    </div>
+                `).join('');
+            }
         }
 
         // Navigation
@@ -1493,14 +2136,14 @@
             } else if (page === 'ministries') {
                 document.getElementById('ministriesPage').classList.add('active');
             } else if (page === 'sermons') {
-                document.getElementById('sermonsPage')?.classList.add('active');
+                document.getElementById('sermonsPage').classList.add('active');
                 loadAllSermons();
             } else if (page === 'projects') {
-                document.getElementById('projectsPage')?.classList.add('active');
+                document.getElementById('projectsPage').classList.add('active');
                 loadAllProjects();
             } else if (page === 'events') {
-                document.getElementById('eventsPage')?.classList.add('active');
-                loadEvents();
+                document.getElementById('eventsPage').classList.add('active');
+                loadAllEvents();
             }
         }
 
@@ -1536,22 +2179,32 @@
         }
 
         function connectNewHere() {
-            const topic = document.getElementById('newHereTopic').value;
-            if (topic) {
-                alert(`Thank you for reaching out! We'll be praying about: ${topic}. Someone will contact you soon.`);
-                document.getElementById('newHereTopic').value = '';
+            const prayerTeam = document.getElementById('prayerTeam').checked;
+            const meetPastor = document.getElementById('meetPastorNew').checked;
+            
+            if (prayerTeam || meetPastor) {
+                let message = "Thank you for reaching out! ";
+                if (prayerTeam) message += "Our prayer team will contact you soon. ";
+                if (meetPastor) message += "A pastor will reach out to schedule a time to meet.";
                 
-                // Store in localStorage for admin to see
+                alert(message);
+                
+                // Store in localStorage for admin
                 const newConnections = JSON.parse(localStorage.getItem('newConnections')) || [];
                 newConnections.push({
                     name: currentUser?.name || 'Guest',
                     email: currentUser?.email || 'Not provided',
-                    topic: topic,
+                    prayerTeam: prayerTeam,
+                    meetPastor: meetPastor,
                     timestamp: new Date().toISOString()
                 });
                 localStorage.setItem('newConnections', JSON.stringify(newConnections));
+                
+                // Reset checkboxes
+                document.getElementById('prayerTeam').checked = false;
+                document.getElementById('meetPastorNew').checked = false;
             } else {
-                alert('Please tell us how we can pray for you.');
+                alert('Please select at least one option so we know how to help you.');
             }
         }
 
@@ -1586,10 +2239,12 @@
             const name = document.getElementById('signupName').value;
             const email = document.getElementById('signupEmail').value;
             const password = document.getElementById('signupPassword').value;
-            const topic = document.getElementById('signupTopic').value;
+            const phone = document.getElementById('signupPhone').value;
+            const contactMe = document.getElementById('contactMe').checked;
+            const meetPastor = document.getElementById('meetPastor').checked;
 
             if (name && email && password) {
-                currentUser = { name, email, topic };
+                currentUser = { name, email, phone, contactMe, meetPastor };
                 localStorage.setItem('user', JSON.stringify(currentUser));
                 
                 document.getElementById('signupModal').classList.remove('active');
@@ -1597,11 +2252,11 @@
                 updateUserInterface();
                 loadContent();
                 
-                if (topic) {
-                    setTimeout(() => {
-                        alert(`Welcome ${name}! We'll be praying about: ${topic}`);
-                    }, 500);
+                let welcomeMessage = `Welcome ${name}! `;
+                if (contactMe || meetPastor) {
+                    welcomeMessage += "Someone will contact you soon.";
                 }
+                alert(welcomeMessage);
             } else {
                 alert('Please fill in all required fields');
             }
@@ -1729,26 +2384,54 @@
             const email = prompt('Enter email address to invite:');
             if (email) {
                 alert(`Invitation sent to ${email}`);
-                // In real app, send invitation email
             }
         }
 
         // Media functions
         function playSermon(id) {
             const sermon = sermons.find(s => s.id === id);
-            alert(`Playing: ${sermon.title}`);
+            playVideo(sermon.id, sermon.title, sermon.speaker);
         }
 
-        function playVideo(videoId) {
-            alert(`Playing video: ${videoId}`);
+        function playVideo(videoId, title, description) {
+            document.getElementById('videoTitle').textContent = title || 'Video Title';
+            document.getElementById('videoDescription').textContent = description || 'Video description';
+            const videoPlayer = document.getElementById('videoPlayer');
+            // In production, set actual video source
+            videoPlayer.src = 'sample-video.mp4';
+            document.getElementById('videoModal').classList.add('active');
         }
 
-        function playAudio(audioId) {
-            alert(`Playing audio: ${audioId}`);
+        function closeVideoModal() {
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.pause();
+            videoPlayer.src = '';
+            document.getElementById('videoModal').classList.remove('active');
         }
 
-        function downloadPDF(pdfId) {
-            alert(`Downloading: ${pdfId}`);
+        function playAudio(audioId, title) {
+            document.getElementById('audioTitle').textContent = title || 'Audio Title';
+            const audioPlayer = document.getElementById('audioPlayer');
+            // In production, set actual audio source
+            audioPlayer.src = 'sample-audio.mp3';
+            document.getElementById('audioModal').classList.add('active');
+        }
+
+        function closeAudioModal() {
+            const audioPlayer = document.getElementById('audioPlayer');
+            audioPlayer.pause();
+            audioPlayer.src = '';
+            document.getElementById('audioModal').classList.remove('active');
+        }
+
+        function downloadPDF(pdfId, title, description) {
+            document.getElementById('pdfTitle').textContent = title || 'PDF Document';
+            document.getElementById('pdfLink').textContent = `Download ${title}`;
+            document.getElementById('pdfModal').classList.add('active');
+        }
+
+        function closePdfModal() {
+            document.getElementById('pdfModal').classList.remove('active');
         }
 
         function showProjectDetails(id) {
@@ -1770,6 +2453,26 @@
             document.getElementById('projectModal').classList.remove('active');
         }
 
+        function registerForEvent(eventId) {
+            const event = events.find(e => e.id === eventId);
+            if (currentUser) {
+                alert(`Thank you for registering for ${event.title}! We'll send you a confirmation email.`);
+                
+                // Store registration
+                const registrations = JSON.parse(localStorage.getItem('eventRegistrations')) || [];
+                registrations.push({
+                    eventId: eventId,
+                    eventTitle: event.title,
+                    userName: currentUser.name,
+                    userEmail: currentUser.email,
+                    timestamp: new Date().toISOString()
+                });
+                localStorage.setItem('eventRegistrations', JSON.stringify(registrations));
+            } else {
+                alert('Please log in to register for events');
+            }
+        }
+
         // Load all sermons page
         function loadAllSermons() {
             const grid = document.getElementById('allSermonsGrid');
@@ -1787,7 +2490,12 @@
                                 <span>${sermon.speaker}</span>
                                 <span>${sermon.date}</span>
                             </div>
-                            <button class="play-btn" onclick="playSermon(${sermon.id})">Watch Now</button>
+                            <button class="play-btn" onclick="playSermon(${sermon.id})">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                                Watch Now
+                            </button>
                         </div>
                     </div>
                 `).join('');
@@ -1809,45 +2517,28 @@
             }
         }
 
-        function loadEvents() {
-            const eventsList = document.getElementById('eventsList');
-            if (eventsList) {
-                eventsList.innerHTML = `
-                    <div class="sermon-card" style="margin-bottom: 1rem;">
-                        <div class="sermon-content">
-                            <h3>Easter Sunday Service</h3>
-                            <p>March 31, 2024 • 9:00 AM & 11:00 AM</p>
+        function loadAllEvents() {
+            const grid = document.getElementById('allEventsGrid');
+            if (grid) {
+                grid.innerHTML = events.map(event => `
+                    <div class="event-card">
+                        <h3>${event.title}</h3>
+                        <div class="event-details">
+                            <span>${event.date}</span>
+                            <span>${event.time}</span>
                         </div>
+                        <p>${event.description}</p>
+                        <p><small>📍 ${event.location}</small></p>
+                        <button class="event-register" onclick="registerForEvent(${event.id})">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                            </svg>
+                            Register Now
+                        </button>
                     </div>
-                    <div class="sermon-card" style="margin-bottom: 1rem;">
-                        <div class="sermon-content">
-                            <h3>Men's Conference</h3>
-                            <p>April 15-16, 2024 • Register Now</p>
-                        </div>
-                    </div>
-                `;
+                `).join('');
             }
         }
-
-        // Create missing pages
-        document.addEventListener('DOMContentLoaded', function() {
-            const pages = ['sermonsPage', 'projectsPage', 'eventsPage'];
-            pages.forEach(pageId => {
-                if (!document.getElementById(pageId)) {
-                    const div = document.createElement('div');
-                    div.className = 'ministry-page';
-                    div.id = pageId;
-                    div.innerHTML = `
-                        <button class="back-btn" onclick="goToHome()">← Back</button>
-                        <h2 class="section-title">${pageId.replace('Page', '').charAt(0).toUpperCase() + pageId.replace('Page', '').slice(1)}</h2>
-                        <div class="${pageId === 'sermonsPage' ? 'sermons-grid' : pageId === 'projectsPage' ? 'projects-grid' : 'events-list'}" 
-                             id="${pageId === 'sermonsPage' ? 'allSermonsGrid' : pageId === 'projectsPage' ? 'allProjectsGrid' : 'eventsList'}">
-                        </div>
-                    `;
-                    document.querySelector('.app-container').appendChild(div);
-                }
-            });
-        });
     </script>
 </body>
 </html>
