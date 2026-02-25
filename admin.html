@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Table - Admin Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-black: #1a1a1a;
+            --pure-white: #ffffff;
+            --accent-gold: #C5A028;
+            --accent-teal: #2A9D8F;
+            --accent-purple: #9B59B6;
+            --accent-coral: #E76F51;
+            --soft-gray: #F8F9FA;
+            --text-dark: #2C3E50;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--soft-gray);
+            color: var(--text-dark);
+        }
+
+        /* Admin Login */
+        .admin-login {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary-black), var(--accent-purple));
+        }
+
+        .login-box {
+            background: var(--pure-white);
+            padding: 3rem;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .login-box h1 {
+            margin-bottom: 2rem;
+            color: var(--primary-black);
+            text-align: center;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 2px solid #E0E0E0;
+            border-radius: 12px;
+            font-size: 1rem;
+        }
+
+        .login-box button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--gradient-gold);
+            color: var(--pure-white);
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Admin Dashboard */
+        .admin-dashboard {
+            display: none;
+        }
+
+        .admin-dashboard.active {
+            display: block;
+        }
+
+        .admin-header {
+            background: var(--pure-white);
+            padding: 1rem 2rem;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-nav {
+            background: var(--primary-black);
+            padding: 1rem 2rem;
+        }
+
+        .admin-nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .admin-nav a {
+            color: var(--pure-white);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: background 0.2s;
+        }
+
+        .admin-nav a:hover,
+        .admin-nav a.active {
+            background: var(--accent-gold);
+        }
+
+        .admin-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Cards */
+        .admin-card {
+            background: var(--pure-white);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .admin-card h2 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-black);
+        }
+
+        /* Tables */
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .admin-table th {
+            background: var(--soft-gray);
+            font-weight: 600;
+        }
+
+        .admin-table tr:hover {
+            background: var(--soft-gray);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--accent-gold);
+            color: var(--pure-white);
+        }
+
+        .btn-danger {
+            background: var(--accent-coral);
+            color: var(--pure-white);
+        }
+
+        .btn-edit {
+            background: var(--accent-teal);
+            color: var(--pure-white);
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #E0E0E0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--pure-white);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Messages */
+        .message-item {
+            background: var(--soft-gray);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+
+        .message-item.unread {
+            border-left: 4px solid var(--accent-gold);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--pure-white);
+            padding: 2rem;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .admin-nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .admin-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Login -->
+    <div class="admin-login" id="adminLogin">
+        <div class="login-box">
+            <h1>Admin Portal</h1>
+            <input type="email" placeholder="Email" id="adminEmail">
+            <input type="password" placeholder="Password" id="adminPassword">
+            <button onclick="adminLogin()">Access Dashboard</button>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div class="admin-dashboard" id="adminDashboard">
+        <header class="admin-header">
+            <h1>The Table - Admin Portal</h1>
+            <button class="btn btn-danger" onclick="adminLogout()">Logout</button>
+        </header>
+
+        <nav class="admin-nav">
+            <ul>
+                <li><a href="#" class="active" onclick="showSection('dashboard')">Dashboard</a></li>
+                <li><a href="#" onclick="showSection('sermons')">Sermons</a></li>
+                <li><a href="#" onclick="showSection('users')">Users</a></li>
+                <li><a href="#" onclick="showSection('messages')">Messages</a></li>
+                <li><a href="#" onclick="showSection('projects')">Projects</a></li>
+                <li><a href="#" onclick="showSection('ministries')">Ministries</a></li>
+            </ul>
+        </nav>
+
+        <div class="admin-content">
+            <!-- Dashboard Section -->
+            <div id="dashboardSection">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>156</h3>
+                        <p>Total Users</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>24</h3>
+                        <p>New This Week</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>12</h3>
+                        <p>Unread Messages</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>8</h3>
+                        <p>New Converts</p>
+                    </div>
+                </div>
+
+                <div class="admin-card">
+                    <h2>Recent Activity</h2>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Action</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>John Doe</td>
+                                <td>Joined Church</td>
+                                <td>5 mins ago</td>
+                            </tr>
+                            <tr>
+                                <td>Sarah Smith</td>
+                                <td>Watched Sermon</td>
+                                <td>15 mins ago</td>
+                            </tr>
+                            <tr>
+                                <td>Mike Johnson</td>
+                                <td>Sent Message</td>
+                                <td>1 hour ago</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Sermons Section -->
+            <div id="sermonsSection" style="display: none;">
+                <div class="admin-card">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 2rem;">
+                        <h2>Manage Sermons</h2>
+                        <button class="btn btn-primary" onclick="showAddSermonModal()">+ Add New Sermon</button>
+                    </div>
+                    
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Speaker</th>
+                                <th>Date</th>
+                                <th>Views</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sermonsTable">
+                            <tr>
+                                <td>The Power of Unity</td>
+                                <td>Pastor John</td>
+                                <td>2024-03-10</td>
+                                <td>234</td>
+                                <td>
+                                    <button class="btn btn-edit" onclick="editSermon(1)">Edit</button>
+                                    <button class="btn btn-danger" onclick="deleteSermon(1)">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Users Section -->
+            <div id="usersSection" style="display: none;">
+                <div class="admin-card">
+                    <h2>Manage Users</h2>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Joined</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTable">
+                            <tr>
+                                <td>John Doe</td>
+                                <td>john@email.com</td>
+                                <td>2024-03-01</td>
+                                <td>Active</td>
+                                <td>
+                                    <button class="btn btn-primary" onclick="messageUser(1)">Message</button>
+                                    <button class="btn btn-danger" onclick="deleteUser(1)">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Messages Section -->
+            <div id="messagesSection" style="display: none;">
+                <div class="admin-card">
+                    <h2>User Messages</h2>
+                    <div id="messagesList"></div>
+                </div>
+            </div>
+
+            <!-- Projects Section -->
+            <div id="projectsSection" style="display: none;">
+                <div class="admin-card">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 2rem;">
+                        <h2>Manage Projects</h2>
+                        <button class="btn btn-primary" onclick="showAddProjectModal()">+ Add New Project</button>
+                    </div>
+                    
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Project</th>
+                                <th>Description</th>
+                                <th>Media Files</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="projectsTable">
+                            <tr>
+                                <td>Children's Renovation</td>
+                                <td>New children's wing</td>
+                                <td>3 files</td>
+                                <td>
+                                    <button class="btn btn-edit" onclick="editProject(1)">Edit</button>
+                                    <button class="btn btn-danger" onclick="deleteProject(1)">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Ministries Section -->
+            <div id="ministriesSection" style="display: none;">
+                <div class="admin-card">
+                    <h2>Ministry Content</h2>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <h3>Sunday School</h3>
+                        <button class="btn btn-primary" onclick="addMaterial('sunday-school')">Add Material</button>
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Type</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>The Creation Story</td>
+                                    <td>Video</td>
+                                    <td>
+                                        <button class="btn btn-edit">Edit</button>
+                                        <button class="btn btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Sermon Modal -->
+    <div class="modal" id="sermonModal">
+        <div class="modal-content">
+            <h2 id="sermonModalTitle">Add New Sermon</h2>
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" id="sermonTitle">
+            </div>
+            <div class="form-group">
+                <label>Speaker</label>
+                <input type="text" id="sermonSpeaker">
+            </div>
+            <div class="form-group">
+                <label>Date</label>
+                <input type="date" id="sermonDate">
+            </div>
+            <div class="form-group">
+                <label>Video URL</label>
+                <input type="url" id="sermonVideo">
+            </div>
+            <div class="form-group">
+                <label>Transcript</label>
+                <textarea id="sermonTranscript" placeholder="Paste sermon transcript here..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Thumbnail Image</label>
+                <input type="file" id="sermonImage" accept="image/*">
+            </div>
+            <button class="btn btn-primary" onclick="saveSermon()">Save Sermon</button>
+            <button class="btn btn-danger" onclick="closeModal('sermonModal')">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Message User Modal -->
+    <div class="modal" id="messageModal">
+        <div class="modal-content">
+            <h2>Send Message</h2>
+            <div class="form-group">
+                <label>To</label>
+                <input type="text" id="messageRecipient" readonly>
+            </div>
+            <div class="form-group">
+                <label>Subject</label>
+                <input type="text" id="messageSubject">
+            </div>
+            <div class="form-group">
+                <label>Message</label>
+                <textarea id="messageContent" rows="5"></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="sendAdminMessage()">Send Message</button>
+            <button class="btn btn-danger" onclick="closeModal('messageModal')">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        // Admin state
+        let isAdminLoggedIn = false;
+        let currentSection = 'dashboard';
+
+        // Admin login
+        function adminLogin() {
+            const email = document.getElementById('adminEmail').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            // In production, validate against backend
+            if (email === 'admin@thetable.church' && password === 'admin123') {
+                isAdminLoggedIn = true;
+                document.getElementById('adminLogin').style.display = 'none';
+                document.getElementById('adminDashboard').classList.add('active');
+                loadAdminData();
+            } else {
+                alert('Invalid credentials');
+            }
+        }
+
+        function adminLogout() {
+            isAdminLoggedIn = false;
+            document.getElementById('adminLogin').style.display = 'flex';
+            document.getElementById('adminDashboard').classList.remove('active');
+        }
+
+        // Show section
+        function showSection(section) {
+            currentSection = section;
+            
+            // Update nav
+            document.querySelectorAll('.admin-nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Hide all sections
+            document.getElementById('dashboardSection').style.display = 'none';
+            document.getElementById('sermonsSection').style.display = 'none';
+            document.getElementById('usersSection').style.display = 'none';
+            document.getElementById('messagesSection').style.display = 'none';
+            document.getElementById('projectsSection').style.display = 'none';
+            document.getElementById('ministriesSection').style.display = 'none';
+            
+            // Show selected section
+            document.getElementById(section + 'Section').style.display = 'block';
+            
+            if (section === 'messages') {
+                loadMessages();
+            }
+        }
+
+        // Load admin data
+        function loadAdminData() {
+            // In production, fetch from backend
+            loadMessages();
+        }
+
+        // Message functions
+        function loadMessages() {
+            const messagesList = document.getElementById('messagesList');
+            const sampleMessages = [
+                { id: 1, from: 'John Doe', subject: 'Prayer Request', message: 'Please pray for my family', read: false },
+                { id: 2, from: 'Sarah Smith', subject: 'Question about baptism', message: 'I would like to know more...', read: true },
+                { id: 3, from: 'Mike Johnson', subject: 'New Convert', message: 'I gave my life to Christ!', read: false }
+            ];
+            
+            messagesList.innerHTML = sampleMessages.map(msg => `
+                <div class="message-item ${!msg.read ? 'unread' : ''}" onclick="viewMessage(${msg.id})">
+                    <strong>${msg.from}</strong><br>
+                    <small>${msg.subject}</small>
+                </div>
+            `).join('');
+        }
+
+        function viewMessage(id) {
+            alert(`Viewing message ${id}`);
+            // In production, open message detail
+        }
+
+        function messageUser(userId) {
+            document.getElementById('messageRecipient').value = `User ${userId}`;
+            document.getElementById('messageModal').classList.add('active');
+        }
+
+        function sendAdminMessage() {
+            const recipient = document.getElementById('messageRecipient').value;
+            const subject = document.getElementById('messageSubject').value;
+            const content = document.getElementById('messageContent').value;
+            
+            alert(`Message sent to ${recipient}`);
+            closeModal('messageModal');
+        }
+
+        // Sermon functions
+        function showAddSermonModal() {
+            document.getElementById('sermonModalTitle').textContent = 'Add New Sermon';
+            document.getElementById('sermonTitle').value = '';
+            document.getElementById('sermonSpeaker').value = '';
+            document.getElementById('sermonDate').value = '';
+            document.getElementById('sermonVideo').value = '';
+            document.getElementById('sermonTranscript').value = '';
+            document.getElementById('sermonModal').classList.add('active');
+        }
+
+        function editSermon(id) {
+            document.getElementById('sermonModalTitle').textContent = 'Edit Sermon';
+            // Load sermon data
+            document.getElementById('sermonModal').classList.add('active');
+        }
+
+        function saveSermon() {
+            const title = document.getElementById('sermonTitle').value;
+            const speaker = document.getElementById('sermonSpeaker').value;
+            const date = document.getElementById('sermonDate').value;
+            const video = document.getElementById('sermonVideo').value;
+            const transcript = document.getElementById('sermonTranscript').value;
+            
+            alert(`Sermon "${title}" saved successfully`);
+            closeModal('sermonModal');
+        }
+
+        function deleteSermon(id) {
+            if (confirm('Are you sure you want to delete this sermon?')) {
+                alert(`Sermon ${id} deleted`);
+            }
+        }
+
+        // User functions
+        function deleteUser(id) {
+            if (confirm('Are you sure you want to delete this user? This action cannot be undone.')) {
+                alert(`User ${id} has been deleted`);
+            }
+        }
+
+        // Project functions
+        function showAddProjectModal() {
+            alert('Add project modal would open here');
+        }
+
+        function editProject(id) {
+            alert(`Editing project ${id}`);
+        }
+
+        function deleteProject(id) {
+            if (confirm('Delete this project?')) {
+                alert(`Project ${id} deleted`);
+            }
+        }
+
+        // Ministry functions
+        function addMaterial(ministry) {
+            alert(`Adding material to ${ministry}`);
+        }
+
+        // Modal functions
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>
